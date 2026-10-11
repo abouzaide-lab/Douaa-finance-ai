@@ -73,6 +73,52 @@ show_result(
     "Measures net profit generated per 100 DZD of revenue."
 )
 
+# Liquidity and solvency analysis
+current_assets = get_value("current_assets")
+current_liabilities = get_value("current_liabilities")
+inventory = get_value("inventory")
+total_assets = get_value("total_assets")
+equity = get_value("equity")
+
+print("\n" + "=" * 48)
+print("LIQUIDITY AND SOLVENCY")
+print("=" * 48)
+
+def show_multiple(name, numerator, denominator, explanation):
+    print(f"\n{name}")
+
+    if numerator is None or denominator in (None, 0):
+        print("Not enough data to calculate.")
+        return
+
+    result = numerator / denominator
+    print(f"Result: {result:.2f}x")
+    print(f"Interpretation: {explanation}")
+
+show_multiple(
+    "Current ratio",
+    current_assets,
+    current_liabilities,
+    "Compares current assets with current liabilities."
+)
+
+quick_assets = None
+if current_assets is not None and inventory is not None:
+    quick_assets = current_assets - inventory
+
+show_multiple(
+    "Quick ratio",
+    quick_assets,
+    current_liabilities,
+    "Excludes inventory from current assets."
+)
+
+show_result(
+    "Equity / Total assets",
+    calculate_ratio(equity, total_assets),
+    "Shows the percentage of assets financed by equity."
+)
+
 # Data-quality checks
 print("\n" + "=" * 48)
 print("DATA QUALITY CHECK")

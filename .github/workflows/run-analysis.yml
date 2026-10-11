@@ -19,7 +19,7 @@ jobs:
           python-version: "3.12"
 
       - name: Check Python syntax
-        run: python -m py_compile analyze.py
+        run: python -m py_compile data/analyze.py
 
       - name: Run financial analysis
-        run: python analyze.py
+        run: python data/analyze.py

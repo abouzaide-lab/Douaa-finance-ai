@@ -1,5 +1,7 @@
+
 {
   "fiscal_year": 2025,
+  "company": "SAIDAL",
   "records": [
     {
       "metric": "current_assets",
@@ -52,4 +54,4 @@
       "verification_status": "check_exact_statement_value"
     }
   ]
-    }
+}

@@ -1,1 +1,52 @@
 
+{
+  "metric": "current_assets",
+  "label_ar": "الأصول المتداولة",
+  "year": 2025,
+  "value": 43660956000,
+  "unit": "DZD",
+  "source_page": 42,
+  "data_type": "reported",
+  "verification_status": "check_exact_statement_value"
+},
+{
+  "metric": "current_liabilities",
+  "label_ar": "الخصوم المتداولة",
+  "year": 2025,
+  "value": 29295165000,
+  "unit": "DZD",
+  "source_page": 42,
+  "data_type": "reported",
+  "verification_status": "check_exact_statement_value"
+},
+{
+  "metric": "inventory",
+  "label_ar": "المخزون الصافي",
+  "year": 2025,
+  "value": 9792655000,
+  "unit": "DZD",
+  "source_page": 42,
+  "data_type": "reported",
+  "verification_status": "check_exact_statement_value"
+},
+{
+  "metric": "total_assets",
+  "label_ar": "إجمالي الأصول",
+  "year": 2025,
+  "value": 72377873000,
+  "unit": "DZD",
+  "source_page": 42,
+  "data_type": "reported",
+  "verification_status": "check_exact_statement_value"
+},
+{
+  "metric": "equity",
+  "label_ar": "حقوق الملكية",
+  "year": 2025,
+  "value": 23385694000,
+  "unit": "DZD",
+  "source_page": 42,
+  "data_type": "reported",
+  "verification_status": "check_exact_statement_value"
+}
+

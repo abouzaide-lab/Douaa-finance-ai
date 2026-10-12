@@ -749,8 +749,177 @@ with tab2:
                 "تختلف النسب المناسبة حسب القطاع، "
                 "ولا يكفي هذا التحليل وحده للحكم على الشركة."
             )
+            
+    # ==================================================
+    # مقارنة شركتين
+    # ==================================================
+    st.divider()
+    st.header("⚖️ مقارنة شركتين")
 
+    st.info(
+        "أدخل بيانات الشركتين من مصادر موثوقة وبالعملة نفسها "
+        "وللسنة المالية نفسها قدر الإمكان."
+    )
 
+    with st.form("company_comparison"):
+        col_a, col_b = st.columns(2)
+
+        with col_a:
+            st.subheader("الشركة الأولى")
+            company_a = st.text_input(
+                "اسم الشركة الأولى",
+                key="compare_name_a"
+            )
+            revenue_a = st.number_input(
+                "الإيرادات (دج) — الأولى",
+                min_value=0.0,
+                key="compare_revenue_a"
+            )
+            profit_a = st.number_input(
+                "صافي الربح (دج) — الأولى",
+                key="compare_profit_a"
+            )
+            debt_a = st.number_input(
+                "إجمالي الديون (دج) — الأولى",
+                min_value=0.0,
+                key="compare_debt_a"
+            )
+            equity_a = st.number_input(
+                "حقوق الملكية (دج) — الأولى",
+                key="compare_equity_a"
+            )
+
+        with col_b:
+            st.subheader("الشركة الثانية")
+            company_b = st.text_input(
+                "اسم الشركة الثانية",
+                key="compare_name_b"
+            )
+            revenue_b = st.number_input(
+                "الإيرادات (دج) — الثانية",
+                min_value=0.0,
+                key="compare_revenue_b"
+            )
+            profit_b = st.number_input(
+                "صافي الربح (دج) — الثانية",
+                key="compare_profit_b"
+            )
+            debt_b = st.number_input(
+                "إجمالي الديون (دج) — الثانية",
+                min_value=0.0,
+                key="compare_debt_b"
+            )
+            equity_b = st.number_input(
+                "حقوق الملكية (دج) — الثانية",
+                key="compare_equity_b"
+            )
+
+        compare_submitted = st.form_submit_button(
+            "مقارنة الشركتين"
+        )
+
+    if compare_submitted:
+        if not company_a.strip() or not company_b.strip():
+            st.warning("أدخل اسم الشركتين أولًا.")
+        elif company_a.strip().casefold() == company_b.strip().casefold():
+            st.warning("أدخل اسمين مختلفين للشركتين.")
+        else:
+            margin_a = ratio(profit_a, revenue_a)
+            margin_b = ratio(profit_b, revenue_b)
+
+            debt_equity_a = ratio(debt_a, equity_a)
+            debt_equity_b = ratio(debt_b, equity_b)
+
+            st.subheader(
+                f"نتائج المقارنة: {company_a} و{company_b}"
+            )
+
+            st.markdown("**الإيرادات**")
+            c1, c2 = st.columns(2)
+            c1.metric(company_a, money(revenue_a))
+            c2.metric(company_b, money(revenue_b))
+
+            st.markdown("**صافي الربح**")
+            c1, c2 = st.columns(2)
+            c1.metric(company_a, money(profit_a))
+            c2.metric(company_b, money(profit_b))
+
+            st.markdown("**هامش صافي الربح**")
+            c1, c2 = st.columns(2)
+            c1.metric(
+                company_a,
+                percent(
+                    margin_a * 100
+                    if margin_a is not None else None
+                )
+            )
+            c2.metric(
+                company_b,
+                percent(
+                    margin_b * 100
+                    if margin_b is not None else None
+                )
+            )
+
+            if margin_a is not None and margin_b is not None:
+                if margin_a > margin_b:
+                    st.success(
+                        f"{company_a} لديها هامش ربح أعلى."
+                    )
+                elif margin_b > margin_a:
+                    st.success(
+                        f"{company_b} لديها هامش ربح أعلى."
+                    )
+                else:
+                    st.info("هامش الربح متساوٍ بين الشركتين.")
+            else:
+                st.warning(
+                    "لا يمكن مقارنة هامش الربح دون إيرادات موجبة "
+                    "للشركتين."
+                )
+
+            st.markdown("**الديون إلى حقوق الملكية**")
+            c1, c2 = st.columns(2)
+            c1.metric(
+                company_a,
+                f"{debt_equity_a:.2f} مرة"
+                if debt_equity_a is not None else "غير متاح"
+            )
+            c2.metric(
+                company_b,
+                f"{debt_equity_b:.2f} مرة"
+                if debt_equity_b is not None else "غير متاح"
+            )
+
+            if (
+                debt_equity_a is not None
+                and debt_equity_b is not None
+            ):
+                if debt_equity_a < debt_equity_b:
+                    st.info(
+                        f"{company_a} لديها ديون أقل نسبةً إلى "
+                        "حقوق الملكية وفق البيانات المدخلة."
+                    )
+                elif debt_equity_b < debt_equity_a:
+                    st.info(
+                        f"{company_b} لديها ديون أقل نسبةً إلى "
+                        "حقوق الملكية وفق البيانات المدخلة."
+                    )
+                else:
+                    st.info(
+                        "نسبة الديون إلى حقوق الملكية متساوية."
+                    )
+            else:
+                st.warning(
+                    "تعذرت مقارنة المديونية؛ "
+                    "تحقق من أن حقوق الملكية موجبة في الشركتين."
+                )
+
+            st.caption(
+                "المقارنة تقتصر على المؤشرات المعروضة. "
+                "لا تعني الأفضلية في مؤشر واحد أن الشركة أفضل "
+                "استثماريًا، ولا تتضمن التقييم السوقي للسهم."
+            )
 # ==================================================
 # التبويب الثالث: حاسبة السندات
 # ==================================================

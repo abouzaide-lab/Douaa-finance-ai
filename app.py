@@ -844,6 +844,158 @@ with tab2:
             c1.metric(company_a, money(profit_a))
             c2.metric(company_b, money(profit_b))
 
+
+    # ==================================================
+    # مقارنة الشركات مع بيانات صيدال
+    # ==================================================
+    st.divider()
+    st.header("⚖️ مقارنة الشركات")
+
+    # تحويل قائمة سجلات صيدال إلى قاموس: اسم المؤشر ← قيمته
+    sa_idal_records = (
+        data.get("records", [])
+        if isinstance(data, dict)
+        else []
+    )
+
+    sa_idal_values = {
+        record.get("metric"): record.get("value")
+        for record in sa_idal_records
+        if isinstance(record, dict)
+        and record.get("value") is not None
+    }
+
+    sa_idal_year = data.get("fiscal_year", 2025) if isinstance(data, dict) else 2025
+
+    use_saidal = st.checkbox(
+        "استخدام بيانات صيدال لعام 2025 للشركة الأولى",
+        value=True,
+        key="compare_use_saidal"
+    )
+
+    if use_saidal:
+        st.info(
+            "تُحمّل الإيرادات وصافي الربح وحقوق الملكية "
+            "من ملف صيدال. إجمالي الديون غير متوفر "
+            "كمؤشر مستقل في الملف الحالي."
+        )
+
+    with st.form("company_comparison"):
+        col_a, col_b = st.columns(2)
+
+        with col_a:
+            st.subheader("الشركة الأولى")
+
+            company_a = st.text_input(
+                "اسم الشركة الأولى",
+                value="صيدال" if use_saidal else "",
+                key="compare_name_a"
+            )
+
+            revenue_a = st.number_input(
+                "الإيرادات (دج) — الأولى",
+                min_value=0.0,
+                value=float(sa_idal_values.get("revenue", 0) or 0)
+                if use_saidal else 0.0,
+                key="compare_revenue_a"
+            )
+
+            profit_a = st.number_input(
+                "صافي الربح (دج) — الأولى",
+                value=float(sa_idal_values.get("net_profit", 0) or 0)
+                if use_saidal else 0.0,
+                key="compare_profit_a"
+            )
+
+            equity_a = st.number_input(
+                "حقوق الملكية (دج) — الأولى",
+                value=float(sa_idal_values.get("equity", 0) or 0)
+                if use_saidal else 0.0,
+                key="compare_equity_a"
+            )
+
+            if use_saidal:
+                debt_a = None
+                st.caption("إجمالي الديون: غير متوفر في ملف صيدال الحالي.")
+            else:
+                debt_a = st.number_input(
+                    "إجمالي الديون (دج) — الأولى",
+                    min_value=0.0,
+                    key="compare_debt_a"
+                )
+
+        with col_b:
+            st.subheader("الشركة الثانية")
+
+            company_b = st.text_input(
+                "اسم الشركة الثانية",
+                key="compare_name_b"
+            )
+
+            revenue_b = st.number_input(
+                "الإيرادات (دج) — الثانية",
+                min_value=0.0,
+                key="compare_revenue_b"
+            )
+
+            profit_b = st.number_input(
+                "صافي الربح (دج) — الثانية",
+                key="compare_profit_b"
+            )
+
+            debt_b = st.number_input(
+                "إجمالي الديون (دج) — الثانية",
+                min_value=0.0,
+                key="compare_debt_b"
+            )
+
+            equity_b = st.number_input(
+                "حقوق الملكية (دج) — الثانية",
+                key="compare_equity_b"
+            )
+
+        compare_submitted = st.form_submit_button(
+            "مقارنة الشركتين"
+        )
+
+    if compare_submitted:
+        if not company_a.strip() or not company_b.strip():
+            st.warning("أدخل اسم الشركتين أولًا.")
+
+        elif company_a.strip().casefold() == company_b.strip().casefold():
+            st.warning("أدخل اسمين مختلفين للشركتين.")
+
+        else:
+            margin_a = ratio(profit_a, revenue_a)
+            margin_b = ratio(profit_b, revenue_b)
+
+            debt_equity_a = (
+                ratio(debt_a, equity_a)
+                if debt_a is not None
+                else None
+            )
+            debt_equity_b = ratio(debt_b, equity_b)
+
+            st.subheader(
+                f"نتائج المقارنة: {company_a} و{company_b}"
+            )
+
+            if use_saidal:
+                st.caption(
+                    f"بيانات الشركة الأولى مستخرجة من ملف صيدال "
+                    f"للسنة المالية {sa_idal_year}."
+                )
+
+            st.markdown("**الإيرادات**")
+            c1, c2 = st.columns(2)
+            c1.metric(company_a, money(revenue_a))
+            c2.metric(company_b, money(revenue_b))
+
+            st.markdown("**صافي الربح أو الخسارة**")
+            c1, c2 = st.columns(2)
+            c1.metric(company_a, money(profit_a))
+            c2.metric(company_b, money(profit_b))
+
             st.markdown("**هامش صافي الربح**")
             c1, c2 = st.columns(2)
             c1.metric(
@@ -874,52 +1026,49 @@ with tab2:
                     st.info("هامش الربح متساوٍ بين الشركتين.")
             else:
                 st.warning(
-                    "لا يمكن مقارنة هامش الربح دون إيرادات موجبة "
-                    "للشركتين."
+                    "تعذرت مقارنة هامش الربح؛ تحقق من الإيرادات."
                 )
 
             st.markdown("**الديون إلى حقوق الملكية**")
             c1, c2 = st.columns(2)
+
             c1.metric(
                 company_a,
                 f"{debt_equity_a:.2f} مرة"
-                if debt_equity_a is not None else "غير متاح"
+                if debt_equity_a is not None else "غير متوفر"
             )
+
             c2.metric(
                 company_b,
                 f"{debt_equity_b:.2f} مرة"
                 if debt_equity_b is not None else "غير متاح"
             )
 
-            if (
-                debt_equity_a is not None
-                and debt_equity_b is not None
-            ):
+            if debt_equity_a is None:
+                st.warning(
+                    "لا يمكن تقييم مديونية صيدال من الملف الحالي "
+                    "لأن إجمالي الديون غير متوفر كمؤشر مستقل."
+                )
+            elif debt_equity_b is not None:
                 if debt_equity_a < debt_equity_b:
                     st.info(
-                        f"{company_a} لديها ديون أقل نسبةً إلى "
-                        "حقوق الملكية وفق البيانات المدخلة."
+                        f"{company_a} لديها نسبة ديون إلى حقوق ملكية أقل."
                     )
                 elif debt_equity_b < debt_equity_a:
                     st.info(
-                        f"{company_b} لديها ديون أقل نسبةً إلى "
-                        "حقوق الملكية وفق البيانات المدخلة."
+                        f"{company_b} لديها نسبة ديون إلى حقوق ملكية أقل."
                     )
                 else:
                     st.info(
                         "نسبة الديون إلى حقوق الملكية متساوية."
                     )
-            else:
-                st.warning(
-                    "تعذرت مقارنة المديونية؛ "
-                    "تحقق من أن حقوق الملكية موجبة في الشركتين."
-                )
 
             st.caption(
-                "المقارنة تقتصر على المؤشرات المعروضة. "
-                "لا تعني الأفضلية في مؤشر واحد أن الشركة أفضل "
-                "استثماريًا، ولا تتضمن التقييم السوقي للسهم."
+                "تعتمد النتائج على البيانات المتاحة والمدخلة. "
+                "ارتفاع هامش الربح أو انخفاض المديونية لا يكفي "
+                "وحده لتحديد ما إذا كان السهم استثمارًا جيدًا."
             )
+
 # ==================================================
 # التبويب الثالث: حاسبة السندات
 # ==================================================

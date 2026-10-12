@@ -2,6 +2,14 @@
 {
   "company": "SAIDAL",
   "fiscal_year": 2025,
+  "comparative_data": {
+    "2024": {
+      "revenue": 22193974396.33,
+      "ebitda_ebe": 1473458315.87,
+      "operating_result": 1127635617.76,
+      "net_profit": 882462833.28
+    }
+  },
   "records": [
     {
       "metric": "revenue",

@@ -34,7 +34,110 @@ def ratio(numerator, denominator):
         return None
     return numerator / denominator
 
+def explain_margin(value, name):
+    """تفسير هامش الربح بالنسبة المئوية."""
+    if value is None:
+        return f"لا يمكن تفسير {name} بسبب نقص البيانات."
 
+    if value < 0:
+        return (
+            f"{name} سلبي ({value:.2f}%)، "
+            "وهذا يشير إلى خسارة وفق هذا المؤشر."
+        )
+    elif value == 0:
+        return f"{name} يساوي صفرًا؛ لا يظهر ربح موجب وفق هذا المؤشر."
+    elif value < 5:
+        return (
+            f"{name} يبلغ {value:.2f}%، "
+            "وهو هامش منخفض نسبيًا كإشارة أولية، "
+            "ويجب مقارنته بالسنوات السابقة وبشركات القطاع."
+        )
+    else:
+        return (
+            f"{name} يبلغ {value:.2f}%. "
+            "يجب تقييمه بمقارنته بتاريخ الشركة وشركات القطاع."
+        )
+
+
+def explain_liquidity(value, name):
+    """تفسير نسبة السيولة مع مراعاة أنها إشارة أولية."""
+    if value is None:
+        return f"لا يمكن حساب {name} بسبب نقص البيانات."
+
+    if value < 1:
+        return (
+            f"{name} تبلغ {value:.2f} مرة؛ "
+            "الأصول المستخدمة في هذا المؤشر أقل من الالتزامات "
+            "قصيرة الأجل، ما يستدعي فحص السيولة والتدفقات النقدية."
+        )
+    elif value <= 1.5:
+        return (
+            f"{name} تبلغ {value:.2f} مرة؛ "
+            "تحتاج إلى تقييم طبيعة الأصول ومواعيد استحقاق الالتزامات."
+        )
+    else:
+        return (
+            f"{name} تبلغ {value:.2f} مرة؛ "
+            "تبدو التغطية أعلى وفق هذا المؤشر، "
+            "لكن ذلك لا يضمن توفر النقد أو جودة الأصول."
+        )
+
+
+def explain_equity_share(value):
+    """تفسير نسبة حقوق الملكية إلى إجمالي الأصول."""
+    if value is None:
+        return "لا يمكن حساب نسبة حقوق الملكية إلى الأصول."
+
+    if value < 0:
+        return (
+            f"النسبة تبلغ {value:.2f}%؛ "
+            "تحقق من البيانات، فقد تشير إلى حقوق ملكية سالبة."
+        )
+    elif value < 30:
+        return (
+            f"حقوق الملكية تمثل {value:.2f}% من الأصول. "
+            "قد يعني ذلك اعتمادًا أكبر على مصادر تمويل أخرى، "
+            "ويجب فحص الديون وتكلفتها."
+        )
+    else:
+        return (
+            f"حقوق الملكية تمثل {value:.2f}% من الأصول. "
+            "قيّم هذه النسبة مع حجم الديون وتكلفة التمويل "
+            "ومستويات الشركات المماثلة."
+        )
+
+
+def explain_growth(old_value, new_value, name):
+    """تفسير التغير بين سنتين ماليتين."""
+    if old_value is None or new_value is None:
+        return f"لا تتوفر بيانات كافية لتفسير تغير {name}."
+
+    if old_value == 0:
+        if new_value > 0:
+            return (
+                f"انتقل {name} من صفر في السنة السابقة "
+                "إلى قيمة موجبة؛ لا يمكن حساب نسبة نمو اعتيادية."
+            )
+        elif new_value < 0:
+            return (
+                f"انتقل {name} من صفر إلى قيمة سالبة؛ "
+                "لا يمكن حساب نسبة نمو اعتيادية."
+            )
+        return f"لم يتغير {name} عن الصفر."
+
+    change = (new_value - old_value) / abs(old_value) * 100
+
+    if change > 0:
+        return (
+            f"{name} ارتفع بنسبة {change:.2f}% "
+            "مقارنة بالسنة السابقة."
+        )
+    elif change < 0:
+        return (
+            f"{name} انخفض بنسبة {abs(change):.2f}% "
+            "مقارنة بالسنة السابقة."
+        )
+    return f"{name} لم يتغير مقارنة بالسنة السابقة."
 def load_saidal():
     if not DATA_FILE.exists():
         return None

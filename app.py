@@ -330,6 +330,141 @@ with tab1:
                     label
                 )
             )
+                    st.subheader("🧭 التقييم المالي العام")
+
+        st.caption(
+            "تقييم أولي مبني على البيانات المتاحة، "
+            "وليس توصية بشراء السهم أو بيعه."
+        )
+
+        # 1. تقييم الربحية
+        st.markdown("### 1. الربحية")
+
+        if revenue is None or revenue <= 0:
+            st.info(
+                "لا يمكن تقييم هوامش الربحية دون إيرادات موجبة."
+            )
+        elif profit is None:
+            st.info("بيانات صافي الربح غير متاحة.")
+        elif profit > 0:
+            st.success(
+                "صافي الربح موجب. تحقق من استدامة الأرباح "
+                "ومقارنتها بالسنوات السابقة."
+            )
+        elif profit < 0:
+            st.warning(
+                "الشركة سجلت خسارة صافية في البيانات المدخلة."
+            )
+        else:
+            st.warning("صافي الربح يساوي صفرًا.")
+
+        # 2. تقييم السيولة
+        st.markdown("### 2. السيولة")
+
+        if current is None:
+            st.info(
+                "لا تتوفر بيانات كافية لحساب السيولة الجارية."
+            )
+        elif current < 1:
+            st.warning(
+                f"السيولة الجارية {current:.2f} مرة. "
+                "الأصول المتداولة أقل من الالتزامات المتداولة؛ "
+                "ينبغي فحص التدفقات النقدية ومواعيد الاستحقاق."
+            )
+        else:
+            st.success(
+                f"السيولة الجارية {current:.2f} مرة. "
+                "الأصول المتداولة تغطي الالتزامات المتداولة "
+                "حسابيًا، لكن ذلك لا يضمن توفر النقد."
+            )
+
+        # 3. تقييم الملاءة المالية
+        st.markdown("### 3. الملاءة المالية")
+
+        if equity_share is None:
+            st.info(
+                "لا تتوفر بيانات كافية لحساب حقوق الملكية إلى الأصول."
+            )
+        elif equity_share < 0:
+            st.warning(
+                "حقوق الملكية سالبة وفق البيانات المدخلة؛ "
+                "يجب التحقق من التقرير المالي."
+            )
+        else:
+            st.write(
+                "نسبة حقوق الملكية إلى الأصول: "
+                f"{equity_share * 100:.2f}%."
+            )
+            st.caption(
+                "تُفسر النسبة مع حجم الديون وتكلفتها "
+                "وطبيعة نشاط الشركة، ولا تكفي وحدها للحكم على الملاءة."
+            )
+
+        # 4. اتجاه صافي الربح
+        st.markdown("### 4. اتجاه صافي الربح")
+
+        old_profit = old.get("net_profit")
+
+        if profit is None or old_profit is None:
+            st.info(
+                "لا يمكن مقارنة صافي الربح دون بيانات السنتين."
+            )
+        elif old_profit == 0:
+            st.info(
+                "صافي ربح السنة السابقة يساوي صفرًا؛ "
+                "لا تصلح نسبة النمو الاعتيادية لهذه الحالة."
+            )
+        else:
+            profit_change = (
+                (profit - old_profit) / abs(old_profit)
+            ) * 100
+
+            st.metric(
+                "تغير صافي الربح",
+                f"{profit_change:+.2f}%"
+            )
+
+            if profit_change > 0:
+                st.success(
+                    "ارتفع صافي الربح مقارنة بالسنة السابقة. "
+                    "تحقق أيضًا من جودة الأرباح والتدفقات النقدية."
+                )
+            elif profit_change < 0:
+                st.warning(
+                    "انخفض صافي الربح مقارنة بالسنة السابقة."
+                )
+            else:
+                st.info(
+                    "صافي الربح لم يتغير مقارنة بالسنة السابقة."
+                )
+
+        # 5. تنبيه بشأن اكتمال البيانات
+        st.markdown("### 5. موثوقية التقييم")
+
+        required_metrics = [
+            "revenue",
+            "net_profit",
+            "current_assets",
+            "current_liabilities",
+            "total_assets",
+            "equity"
+        ]
+
+        missing_metrics = [
+            metric for metric in required_metrics
+            if records.get(metric) is None
+        ]
+
+        if missing_metrics:
+            st.warning(
+                "التقييم غير مكتمل. توجد مؤشرات مالية مفقودة "
+                "قد تؤثر في دقته."
+            )
+        else:
+            st.info(
+                "المؤشرات الأساسية المطلوبة موجودة في ملف البيانات. "
+                "يجب مع ذلك مراجعة الأرقام ومصدرها في التقرير الأصلي."
+)
         chart_options = [
             key for key in labels
             if old.get(key) is not None and records.get(key) is not None

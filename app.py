@@ -318,8 +318,11 @@ with tab1:
                 )
             })
 
+        
         table = pd.DataFrame(rows)
         st.dataframe(table, use_container_width=True)
+
+        # مقارنة النتائج بين السنتين
         st.subheader("📊 ماذا تغير بين السنتين؟")
 
         for key, label in labels.items():
@@ -330,8 +333,10 @@ with tab1:
                     label
                 )
             )
-                    st.subheader("🧭 التقييم المالي العام")
-      
+
+        # التقييم المالي العام
+        st.subheader("🧭 التقييم المالي العام")
+
         st.caption(
             "تقييم أولي مبني على البيانات المتاحة، "
             "وليس توصية بشراء السهم أو بيعه."
@@ -355,6 +360,9 @@ with tab1:
             st.warning(
                 "الشركة سجلت خسارة صافية في البيانات المدخلة."
             )
+        else:
+            st.warning("صافي الربح يساوي صفرًا.")
+
         else:
             st.warning("صافي الربح يساوي صفرًا.")
 

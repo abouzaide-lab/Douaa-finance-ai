@@ -1,131 +1,366 @@
 
-import streamlit as st
+import json
+from pathlib import Path
+
 import pandas as pd
+import streamlit as st
 
 st.set_page_config(
-    page_title="Noura Finance AI",
+    page_title="نورة المالية | Douaa Finance AI",
     page_icon="📊",
-    layout="centered"
+    layout="wide"
 )
 
 st.title("📊 نورة المالية")
-st.subheader("تحليل الشركات والأسهم والسندات الجزائرية")
+st.caption("مساعد تجريبي لتحليل الشركات والأسهم والسندات")
 
-st.info(
-    "نسخة تجريبية: أدخل البيانات من مصادر موثوقة. "
-    "لا توجد أسعار مباشرة متصلة بالبورصة في هذه النسخة."
-)
+DATA_FILE = Path(__file__).parent / "data" / "saidal_2025.json"
 
-company = st.text_input("اسم الشركة")
-source = st.text_input("رابط مصدر البيانات")
-report_date = st.date_input("تاريخ البيانات")
 
-st.header("البيانات المالية (دج)")
+def money(value):
+    if value is None:
+        return "غير متاح"
+    return f"{value:,.2f} دج"
 
-col1, col2 = st.columns(2)
 
-with col1:
-    revenue = st.number_input(
-        "الإيرادات السنوية",
-        min_value=0.0,
-        value=0.0
-    )
-    net_profit = st.number_input(
-        "صافي الربح",
-        value=0.0
-    )
+def percent(value):
+    if value is None:
+        return "غير متاح"
+    return f"{value:.2f}%"
 
-with col2:
-    total_debt = st.number_input(
-        "إجمالي الديون",
-        min_value=0.0,
-        value=0.0
-    )
-    equity = st.number_input(
-        "حقوق الملكية",
-        min_value=0.0,
-        value=0.0
-    )
 
-if st.button("تحليل البيانات", type="primary"):
-    if not company.strip():
-        st.warning("أدخل اسم الشركة أولاً.")
-    elif not source.strip():
-        st.warning("أدخل رابط مصدر البيانات للتحقق منها.")
+def ratio(numerator, denominator):
+    if numerator is None or denominator in (None, 0):
+        return None
+    return numerator / denominator
+
+
+def load_saidal():
+    if not DATA_FILE.exists():
+        return None
+
+    try:
+        with DATA_FILE.open("r", encoding="utf-8") as file:
+            data = json.load(file)
+
+        if not isinstance(data.get("records"), list):
+            return None
+
+        return data
+    except (json.JSONDecodeError, OSError):
+        return None
+
+
+data = load_saidal()
+
+tab1, tab2, tab3 = st.tabs([
+    "📈 تحليل صيدال",
+    "🏢 تحليل شركة",
+    "🧾 حاسبة السندات"
+])
+
+# --------------------------------------------------
+# Tab 1: SAIDAL report-based analysis
+# --------------------------------------------------
+with tab1:
+    st.header("تحليل شركة صيدال")
+
+    if data is None:
+        st.error(
+            "تعذر قراءة ملف البيانات. "
+            "تحقق من data/saidal_2025.json."
+        )
     else:
-        st.header("نتائج التحليل")
-        st.write("**الشركة:**", company)
-        st.write("**تاريخ البيانات:**", report_date)
-        st.write("**المصدر:**", source)
+        records = {
+            item["metric"]: item["value"]
+            for item in data["records"]
+            if "metric" in item and "value" in item
+        }
 
-        if revenue > 0:
-            margin = net_profit / revenue * 100
-            st.metric("هامش صافي الربح", f"{margin:.2f}%")
-        else:
-            st.warning("لا يمكن حساب هامش الربح دون إيرادات موجبة.")
+        old = data.get("comparative_data", {}).get("2024", {})
 
-        if equity > 0:
-            debt_equity = total_debt / equity
-            st.metric(
-                "نسبة الديون إلى حقوق الملكية",
-                f"{debt_equity:.2f}"
-            )
-        else:
-            st.warning(
-                "لا يمكن حساب نسبة الديون إلى حقوق الملكية "
-                "دون حقوق ملكية موجبة."
-            )
-
-        if net_profit < 0:
-            st.error("الشركة سجلت خسارة وفق الرقم المدخل.")
-        elif net_profit > 0:
-            st.success("صافي الربح المدخل موجب.")
+        revenue = records.get("revenue")
+        ebe = records.get("ebitda_ebe")
+        operating = records.get("operating_result")
+        profit = records.get("net_profit")
 
         st.caption(
-            "النتائج حسابية وتعتمد على الأرقام المدخلة، "
-            "وليست توصية بشراء أو بيع ورقة مالية."
+            f"السنة المالية: {data.get('fiscal_year', 'غير محددة')} "
+            "| العملة: الدينار الجزائري"
         )
+
+        st.subheader("المؤشرات المالية")
+
+        c1, c2, c3 = st.columns(3)
+        c1.metric("الإيرادات", money(revenue))
+        c2.metric("النتيجة التشغيلية", money(operating))
+        c3.metric("صافي الربح", money(profit))
+
+        c1, c2, c3 = st.columns(3)
+        c1.metric(
+            "هامش EBE",
+            percent(ratio(ebe, revenue) * 100
+                    if ratio(ebe, revenue) is not None else None)
+        )
+        c2.metric(
+            "هامش التشغيل",
+            percent(ratio(operating, revenue) * 100
+                    if ratio(operating, revenue) is not None else None)
+        )
+        c3.metric(
+            "هامش صافي الربح",
+            percent(ratio(profit, revenue) * 100
+                    if ratio(profit, revenue) is not None else None)
+        )
+
+        st.subheader("السيولة والملاءة المالية")
+
+        current_assets = records.get("current_assets")
+        current_liabilities = records.get("current_liabilities")
+        inventory = records.get("inventory")
+        total_assets = records.get("total_assets")
+        equity = records.get("equity")
+
+        quick_assets = None
+        if current_assets is not None and inventory is not None:
+            quick_assets = current_assets - inventory
+
+        c1, c2, c3 = st.columns(3)
+
+        current = ratio(current_assets, current_liabilities)
+        quick = ratio(quick_assets, current_liabilities)
+        equity_share = ratio(equity, total_assets)
+
+        c1.metric(
+            "السيولة الجارية",
+            f"{current:.2f} مرة" if current is not None else "غير متاح"
+        )
+        c2.metric(
+            "السيولة السريعة",
+            f"{quick:.2f} مرة" if quick is not None else "غير متاح"
+        )
+        c3.metric(
+            "حقوق الملكية / الأصول",
+            percent(equity_share * 100
+                    if equity_share is not None else None)
+        )
+
+        st.subheader("مقارنة 2024 و2025")
+
+        labels = {
+            "revenue": "الإيرادات",
+            "ebitda_ebe": "فائض إجمالي الاستغلال EBE",
+            "operating_result": "النتيجة التشغيلية",
+            "net_profit": "صافي الربح"
+        }
+
+        rows = []
+        for key, label in labels.items():
+            current_value = records.get(key)
+            old_value = old.get(key)
+
+            growth = None
+            if (
+                current_value is not None
+                and old_value is not None
+                and old_value != 0
+            ):
+                growth = (
+                    (current_value - old_value) / abs(old_value)
+                ) * 100
+
+            rows.append({
+                "المؤشر": label,
+                "2024 (دج)": old_value,
+                "2025 (دج)": current_value,
+                "التغير (%)": (
+                    round(growth, 2)
+                    if growth is not None else None
+                )
+            })
+
+        table = pd.DataFrame(rows)
+        st.dataframe(table, use_container_width=True)
+
+        chart_options = [
+            key for key in labels
+            if old.get(key) is not None and records.get(key) is not None
+        ]
+
+        if chart_options:
+            selected = st.selectbox(
+                "اختر مؤشرًا للرسم البياني",
+                chart_options,
+                format_func=lambda key: labels[key]
+            )
+
+            chart = pd.DataFrame({
+                "السنة": ["2024", "2025"],
+                "القيمة بالدينار": [
+                    old[selected],
+                    records[selected]
+                ]
+            }).set_index("السنة")
+
+            st.bar_chart(chart)
+        else:
+            st.info(
+                "لا تتوفر بيانات كافية للمقارنة. "
+                "تحقق من قسم comparative_data في ملف JSON."
+            )
+
+        with st.expander("تفاصيل جودة البيانات"):
+            st.write("الشركة:", data.get("company", "غير محددة"))
+            st.write("عدد المؤشرات:", len(records))
+            st.write(
+                "المصدر: التقرير المالي الذي أُدخلت بياناته "
+                "في ملف JSON. يجب التحقق من القيم من التقرير الأصلي."
+            )
+
+# --------------------------------------------------
+# Tab 2: Manual company analysis
+# --------------------------------------------------
+with tab2:
+    st.header("تحليل شركة يدويًا")
+    st.info(
+        "أدخل الأرقام من تقرير مالي موثوق. "
+        "هذه الحاسبة لا تجلب الأسعار أو التقارير تلقائيًا."
+    )
+
+    with st.form("company_analysis"):
+        company = st.text_input("اسم الشركة")
+        source = st.text_input("رابط التقرير أو مصدر البيانات")
+        year = st.number_input(
+            "السنة المالية",
+            min_value=2000,
+            max_value=2100,
+            value=2025
+        )
+
+        st.subheader("البيانات المالية بالدينار الجزائري")
+
+        revenue_input = st.number_input(
+            "الإيرادات",
+            min_value=0.0,
+            value=0.0
+        )
+        profit_input = st.number_input(
+            "صافي الربح أو الخسارة",
+            value=0.0
+        )
+        debt_input = st.number_input(
+            "إجمالي الديون",
+            min_value=0.0,
+            value=0.0
+        )
+        equity_input = st.number_input(
+            "حقوق الملكية",
+            value=0.0
+        )
+        total_assets_input = st.number_input(
+            "إجمالي الأصول",
+            min_value=0.0,
+            value=0.0
+        )
+
+        submitted = st.form_submit_button("تحليل البيانات")
+
+    if submitted:
+        if not company.strip() or not source.strip():
+            st.warning("أدخل اسم الشركة ومصدر البيانات.")
+        else:
+            st.subheader(f"نتائج تحليل {company}")
+
+            st.write("السنة المالية:", int(year))
+            st.write("المصدر:", source)
+
+            c1, c2, c3 = st.columns(3)
+
+            c1.metric("الإيرادات", money(revenue_input))
+            c2.metric("صافي الربح", money(profit_input))
+
+            margin = ratio(profit_input, revenue_input)
+            c3.metric(
+                "هامش صافي الربح",
+                percent(margin * 100 if margin is not None else None)
+            )
+
+            c1, c2 = st.columns(2)
+
+            debt_equity = ratio(debt_input, equity_input)
+            assets_equity = ratio(equity_input, total_assets_input)
+
+            c1.metric(
+                "الديون / حقوق الملكية",
+                f"{debt_equity:.2f} مرة"
+                if debt_equity is not None else "غير متاح"
+            )
+            c2.metric(
+                "حقوق الملكية / الأصول",
+                percent(assets_equity * 100
+                        if assets_equity is not None else None)
+            )
+
+            if profit_input < 0:
+                st.error("صافي الربح المدخل سالب، أي توجد خسارة.")
+            elif profit_input > 0:
+                st.success("صافي الربح المدخل موجب.")
+
+            st.caption(
+                "النتائج حسابية وتعتمد على البيانات التي أدخلتها."
+            )
+
+# --------------------------------------------------
+# Tab 3: Bond calculator
+# --------------------------------------------------
+with tab3:
+    st.header("حاسبة السندات")
+
+    face_value = st.number_input(
+        "القيمة الاسمية للسند (دج)",
+        min_value=0.0,
+        value=0.0,
+        key="bond_face"
+    )
+
+    annual_rate = st.number_input(
+        "معدل الفائدة السنوية (%)",
+        min_value=0.0,
+        value=0.0,
+        key="bond_rate"
+    )
+
+    purchase_price = st.number_input(
+        "سعر شراء السند (دج)",
+        min_value=0.0,
+        value=0.0,
+        key="bond_price"
+    )
+
+    if st.button("حساب عائد السند"):
+        if purchase_price <= 0:
+            st.warning("أدخل سعر شراء موجبًا.")
+        else:
+            annual_interest = face_value * annual_rate / 100
+            current_yield = annual_interest / purchase_price * 100
+
+            c1, c2 = st.columns(2)
+            c1.metric(
+                "الفائدة السنوية النظرية",
+                money(annual_interest)
+            )
+            c2.metric(
+                "العائد الجاري التقريبي",
+                percent(current_yield)
+            )
+
+            st.caption(
+                "هذا العائد الجاري لا يساوي العائد حتى الاستحقاق. "
+                "ولا يشمل الضرائب أو الرسوم أو مخاطر التعثر."
+            )
 
 st.divider()
-st.header("🧾 حاسبة السندات")
-
-face_value = st.number_input(
-    "القيمة الاسمية للسند (دج)",
-    min_value=0.0,
-    value=0.0,
-    key="face"
+st.caption(
+    "نورة المالية — أداة معلومات وتحليل تجريبية، "
+    "وليست توصية استثمارية."
 )
-
-annual_rate = st.number_input(
-    "الفائدة السنوية (%)",
-    min_value=0.0,
-    value=0.0,
-    key="rate"
-)
-
-purchase_price = st.number_input(
-    "سعر شراء السند (دج)",
-    min_value=0.0,
-    value=0.0,
-    key="price"
-)
-
-if st.button("حساب عائد الفائدة"):
-    if purchase_price > 0:
-        annual_interest = face_value * annual_rate / 100
-        current_yield = annual_interest / purchase_price * 100
-
-        st.metric(
-            "الفائدة السنوية النظرية",
-            f"{annual_interest:,.2f} دج"
-        )
-        st.metric(
-            "العائد الجاري التقريبي",
-            f"{current_yield:.2f}%"
-        )
-        st.caption(
-            "هذا عائد جارٍ تقريبي، وليس العائد حتى الاستحقاق. "
-            "لا يشمل الضرائب أو الرسوم أو مخاطر التعثر."
-        )
-    else:
-        st.warning("أدخل سعر شراء موجباً.")

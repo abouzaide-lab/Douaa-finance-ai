@@ -118,6 +118,37 @@ show_result(
     calculate_ratio(equity, total_assets),
     "Shows the percentage of assets financed by equity."
 )
+# Year-over-year comparison: 2024 vs 2025
+print("\n" + "=" * 48)
+print("SAIDAL YEAR-OVER-YEAR COMPARISON")
+print("=" * 48)
+
+previous_year = data.get("comparative_data", {}).get("2024", {})
+
+comparison_metrics = {
+    "revenue": "Revenue",
+    "ebitda_ebe": "EBE / EBITDA",
+    "operating_result": "Operating result",
+    "net_profit": "Net profit"
+}
+
+for metric, label in comparison_metrics.items():
+    current = get_value(metric)
+    previous = previous_year.get(metric)
+
+    print(f"\n{label}")
+
+    if current is None or previous in (None, 0):
+        print("Not enough data to compare.")
+        continue
+
+    change = current - previous
+    growth = (change / abs(previous)) * 100
+
+    print(f"2024: {previous:,.2f} DZD")
+    print(f"2025: {current:,.2f} DZD")
+    print(f"Change: {change:,.2f} DZD")
+    print(f"Growth: {growth:+.2f}%")
 
 # Data-quality checks
 print("\n" + "=" * 48)

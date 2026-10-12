@@ -660,6 +660,95 @@ with tab2:
             st.caption(
                 "النتائج حسابية وتعتمد على البيانات التي أدخلتها."
             )
+            st.divider()
+            st.subheader("🧭 التقييم المالي الأولي")
+
+            # تقييم هامش الربح
+            if revenue_input <= 0:
+                st.warning(
+                    "لا يمكن تقييم هامش الربح لأن الإيرادات تساوي صفرًا."
+                )
+            else:
+                margin_percent = profit_input / revenue_input * 100
+
+                if margin_percent >= 15:
+                    st.success(
+                        f"هامش الربح {margin_percent:.2f}%: "
+                        "ربحية مرتفعة وفق هذا المؤشر وحده."
+                    )
+                elif margin_percent > 5:
+                    st.info(
+                        f"هامش الربح {margin_percent:.2f}%: "
+                        "ربحية متوسطة وفق هذا المؤشر وحده."
+                    )
+                elif margin_percent >= 0:
+                    st.warning(
+                        f"هامش الربح {margin_percent:.2f}%: "
+                        "هامش منخفض أو محدود."
+                    )
+                else:
+                    st.error(
+                        f"هامش الربح {margin_percent:.2f}%: "
+                        "الشركة سجلت خسارة وفق البيانات المدخلة."
+                    )
+
+            # تقييم المديونية
+            if equity_input <= 0:
+                st.warning(
+                    "لا يمكن تقييم نسبة الديون إلى حقوق الملكية "
+                    "عندما تكون حقوق الملكية صفرًا أو سالبة."
+                )
+            else:
+                debt_ratio = debt_input / equity_input
+
+                if debt_ratio < 0.5:
+                    st.success(
+                        f"الديون إلى حقوق الملكية: {debt_ratio:.2f} مرة. "
+                        "المديونية منخفضة نسبيًا وفق هذا المؤشر."
+                    )
+                elif debt_ratio <= 1:
+                    st.info(
+                        f"الديون إلى حقوق الملكية: {debt_ratio:.2f} مرة. "
+                        "قارن النسبة بمتوسط القطاع."
+                    )
+                else:
+                    st.warning(
+                        f"الديون إلى حقوق الملكية: {debt_ratio:.2f} مرة. "
+                        "المديونية مرتفعة نسبيًا وتحتاج إلى مراجعة."
+                    )
+
+            # تقييم اكتمال البيانات
+            st.subheader("🔎 جودة البيانات")
+
+            missing_items = []
+
+            if revenue_input <= 0:
+                missing_items.append("الإيرادات غير متوفرة أو تساوي صفرًا")
+
+            if total_assets_input <= 0:
+                missing_items.append("إجمالي الأصول غير متوفر")
+
+            if equity_input <= 0:
+                missing_items.append("حقوق الملكية غير موجبة")
+
+            if not source.strip():
+                missing_items.append("مصدر البيانات غير محدد")
+
+            if missing_items:
+                st.warning("يجب مراجعة البيانات التالية:")
+                for item in missing_items:
+                    st.write(f"- {item}")
+            else:
+                st.success(
+                    "الحقول الأساسية المدخلة موجبة، "
+                    "لكن ذلك لا يثبت صحة الأرقام."
+                )
+
+            st.caption(
+                "هذا تقييم أولي وليس توصية بالشراء أو البيع. "
+                "تختلف النسب المناسبة حسب القطاع، "
+                "ولا يكفي هذا التحليل وحده للحكم على الشركة."
+            )
 
 
 # ==================================================

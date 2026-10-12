@@ -247,7 +247,43 @@ with tab1:
             percent(equity_share * 100
                     if equity_share is not None else None)
         )
+        st.subheader("🧠 تفسير نورة المالي")
 
+        with st.expander("تفسير الربحية", expanded=True):
+            st.write(
+                explain_margin(
+                    ratio(ebe, revenue) * 100
+                    if ratio(ebe, revenue) is not None else None,
+                    "هامش EBE"
+                )
+            )
+
+            st.write(
+                explain_margin(
+                    ratio(operating, revenue) * 100
+                    if ratio(operating, revenue) is not None else None,
+                    "هامش النتيجة التشغيلية"
+                )
+            )
+
+            st.write(
+                explain_margin(
+                    ratio(profit, revenue) * 100
+                    if ratio(profit, revenue) is not None else None,
+                    "هامش صافي الربح"
+                )
+            )
+
+        with st.expander("تفسير السيولة والملاءة"):
+            st.write(explain_liquidity(current, "السيولة الجارية"))
+            st.write(explain_liquidity(quick, "السيولة السريعة"))
+
+            st.write(
+                explain_equity_share(
+                    equity_share * 100
+                    if equity_share is not None else None
+                )
+    )
         st.subheader("مقارنة 2024 و2025")
 
         labels = {
@@ -284,7 +320,16 @@ with tab1:
 
         table = pd.DataFrame(rows)
         st.dataframe(table, use_container_width=True)
+        st.subheader("📊 ماذا تغير بين السنتين؟")
 
+        for key, label in labels.items():
+            st.write(
+                "• " + explain_growth(
+                    old.get(key),
+                    records.get(key),
+                    label
+                )
+            )
         chart_options = [
             key for key in labels
             if old.get(key) is not None and records.get(key) is not None

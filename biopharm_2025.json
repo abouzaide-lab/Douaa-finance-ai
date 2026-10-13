@@ -1,0 +1,68 @@
+
+{
+  "company": "BIOPHARM",
+  "company_name": "بيوفارم",
+  "report_year": 2025,
+  "currency": "DZD",
+  "scope": "consolidated",
+  "source": "BIOPHARM Annual Report 2025",
+  "records": [
+    {
+      "metric": "revenue",
+      "label": "رقم الأعمال الموحد",
+      "value": 84197000000,
+      "year": 2025,
+      "data_type": "reported",
+      "verification_status": "verified_summary"
+    },
+    {
+      "metric": "ebitda_ebe",
+      "label": "الفائض الإجمالي للاستغلال EBE",
+      "value": 13000000000,
+      "year": 2025,
+      "data_type": "reported",
+      "verification_status": "verified_summary"
+    },
+    {
+      "metric": "operating_result",
+      "label": "النتيجة التشغيلية",
+      "value": 11407000000,
+      "year": 2025,
+      "data_type": "reported",
+      "verification_status": "verified_summary"
+    },
+    {
+      "metric": "net_profit",
+      "label": "صافي الربح الموحد",
+      "value": 9469000000,
+      "year": 2025,
+      "data_type": "reported",
+      "verification_status": "verified_summary"
+    },
+    {
+      "metric": "self_financing_capacity",
+      "label": "القدرة على التمويل الذاتي",
+      "value": 15673000000,
+      "year": 2025,
+      "data_type": "reported",
+      "verification_status": "verified_summary"
+    },
+    {
+      "metric": "capital_expenditure",
+      "label": "نفقات الاستثمار",
+      "value": 3224000000,
+      "year": 2025,
+      "data_type": "reported",
+      "verification_status": "verified_summary"
+    },
+    {
+      "metric": "roe",
+      "label": "العائد على حقوق الملكية",
+      "value": 14.62,
+      "year": 2025,
+      "data_type": "reported",
+      "unit": "percent",
+      "verification_status": "verified_summary"
+    }
+  ]
+}

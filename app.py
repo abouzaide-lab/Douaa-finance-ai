@@ -18,7 +18,35 @@ st.set_page_config(
 st.title("📊 نورة المالية")
 st.caption("مساعد تجريبي لتحليل الشركات والأسهم والسندات")
 
-DATA_FILE = Path(__file__).parent / "data" / "saidal_2025.json"
+
+DATA_DIR = Path(__file__).parent / "data"
+
+
+def load_companies():
+    """Load all company JSON files from the data folder."""
+    companies = {}
+
+    if not DATA_DIR.exists():
+        return companies
+
+    for file_path in DATA_DIR.glob("*.json"):
+        try:
+            with file_path.open("r", encoding="utf-8") as file:
+                company_data = json.load(file)
+
+            if isinstance(company_data, dict):
+                companies[file_path.stem] = company_data
+
+        except (json.JSONDecodeError, OSError) as error:
+            print(f"Could not load {file_path.name}: {error}")
+
+    return companies
+
+
+companies = load_companies()
+
+# Keep SAIDAL as the default data for the existing analysis
+data = companies.get("saidal_2025", {})
 
 
 # --------------------------------------------------
@@ -154,7 +182,6 @@ def explain_growth(old_value, new_value, name):
 # --------------------------------------------------
 # تحميل بيانات صيدال
 # --------------------------------------------------
-def load_saidal():
     if not DATA_FILE.exists():
         return None
 
@@ -174,7 +201,6 @@ def load_saidal():
         return None
 
 
-data = load_saidal()
 
 
 # --------------------------------------------------

@@ -103,6 +103,45 @@ def display_name(key, obj):
 
 
 def fiscal_year(obj):
+def show_data_verification(obj):
+    if not isinstance(obj, dict):
+        st.warning("تعذر التحقق من بنية بيانات الشركة.")
+        return
+
+    status = obj.get("verification_status", "unknown")
+    source = obj.get("source", "المصدر غير محدد")
+    source_url = obj.get("source_url")
+    year = obj.get("report_year", "غير محددة")
+
+    st.subheader("🔎 مصدر البيانات والتحقق منها")
+    st.write(f"السنة المالية: {year}")
+    st.write(f"المصدر: {source}")
+
+    if status == "verified":
+        st.success("تم التحقق من البيانات وفق المصدر المسجل.")
+    elif status == "pending_primary_source_review":
+        st.warning(
+            "الأرقام مسجلة، لكن مطابقتها مع التقرير المالي الأصلي "
+            "لم تكتمل بعد."
+        )
+    else:
+        st.info("حالة التحقق من البيانات تحتاج إلى مراجعة.")
+
+    if source_url:
+        st.markdown(f"[فتح التقرير الأصلي]({source_url})")
+
+    records = obj.get("records", [])
+    pending = [
+        record.get("label", record.get("metric", "مؤشر غير مسمى"))
+        for record in records
+        if record.get("verification_status")
+        != "verified"
+    ]
+
+    if pending:
+        st.write("المؤشرات التي تحتاج إلى مراجعة:")
+        for label in pending:
+            st.write(f"• {label}")
     if not isinstance(obj, dict):
         return "غير محددة"
 

@@ -1,628 +1,75 @@
 {
   "source": "https://cosob.dz/emetteurs/informations-financieres/",
-  "checked_at": "2026-10-14T18:45:08.930885+00:00",
-  "reports_found": 89,
+  "checked_at": "2026-10-14T20:34:06.105480+00:00",
+  "reports_found": 7,
   "reports": [
     {
-      "title": "Publication du rapport annuel 2025 de la COSOB",
-      "url": "https://cosob.dz/publication-du-rapport-annuel-2025-de-la-cosob/",
-      "discovered_at": "2026-10-14T18:45:08.928011+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "À l’occasion de la Semaine mondiale de l’investisseur, la COSOB organise un atelier de sensibilisation pour promouvoir la culture financière et renforcer la conscience des enjeux de l’investissement.",
-      "url": "https://cosob.dz/a-loccasion-de-la-semaine-mondiale-de-linvestisseur-la-cosob-organise-un-atelier-de-sensibilisation-pour-promouvoir-la-culture-financiere-et-renforcer-la-conscience-des-enjeux-de-l/",
-      "discovered_at": "2026-10-14T18:45:08.928054+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Éducation financière",
-      "url": "https://cosob.dz/education-financiere/",
-      "discovered_at": "2026-10-14T18:45:08.928141+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Le Portail électronique du Marché Financier",
-      "url": "https://cosob.dz/portail-2/",
-      "discovered_at": "2026-10-14T18:45:08.928160+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "رابط دون عنوان",
-      "url": "https://cosob.dz/emetteurs/informations-financieres/",
-      "discovered_at": "2026-10-14T18:45:08.928190+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "باللغة الفرنسية.",
-      "url": "https://cosob.dz/emetteurs/informations-financiere/",
-      "discovered_at": "2026-10-14T18:45:08.928292+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "ACTIONS COTÉES EN BOURSE",
-      "url": "https://cosob.dz/emetteurs/informations-financieres/#tabs-1",
-      "discovered_at": "2026-10-14T18:45:08.928303+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "OBLIGATIONS COTÉES EN BOURSE",
-      "url": "https://cosob.dz/emetteurs/informations-financieres/#tabs-2",
-      "discovered_at": "2026-10-14T18:45:08.928313+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "ARCHIVES",
-      "url": "https://cosob.dz/emetteurs/informations-financieres/#tabs-3",
-      "discovered_at": "2026-10-14T18:45:08.928321+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "SAIDAL Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-saidal-spa-2026/",
-      "discovered_at": "2026-10-14T18:45:08.928331+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "BDL Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-la-bdl-spa-2026-2/",
-      "discovered_at": "2026-10-14T18:45:08.928340+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Moustachir Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-moustachir-spa-2026/",
-      "discovered_at": "2026-10-14T18:45:08.928353+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "EGH El Aurassi Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-egh-el-aurassi-spa-2026/",
-      "discovered_at": "2026-10-14T18:45:08.928363+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "AOM Invest spa",
-      "url": "https://cosob.dz/les-informations-financieres-daom-invest-spa-2026/",
-      "discovered_at": "2026-10-14T18:45:08.928371+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Biopharm Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-biopharm-spa-2026/",
-      "discovered_at": "2026-10-14T18:45:08.928378+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "CPA Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-la-cpa-spa-2026/",
-      "discovered_at": "2026-10-14T18:45:08.928386+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Alliance Assurances Spa",
-      "url": "https://cosob.dz/les-informations-financieres-dalliance-assurances-spa-2026/",
-      "discovered_at": "2026-10-14T18:45:08.928394+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "AOM Invest spa",
-      "url": "https://cosob.dz/les-informations-financieres-daom-invest-spa-2025/",
-      "discovered_at": "2026-10-14T18:45:08.928402+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "EGH El Aurassi Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-egh-el-aurassi-spa-2025/",
-      "discovered_at": "2026-10-14T18:45:08.928410+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "SAIDAL Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-saidal-spa-2025/",
-      "discovered_at": "2026-10-14T18:45:08.928452+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Biopharm Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-biopharm-spa-2025/",
-      "discovered_at": "2026-10-14T18:45:08.928461+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Alliance Assurances Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-alliance-assurances-spa-2025/",
-      "discovered_at": "2026-10-14T18:45:08.928469+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "CPA Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-la-cpa-spa-2025/",
-      "discovered_at": "2026-10-14T18:45:08.928477+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "BDL Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-la-bdl-spa-2026/",
-      "discovered_at": "2026-10-14T18:45:08.928485+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "ALC Spa (premier semestre 2025)",
-      "url": "https://cosob.dz/wp-content/uploads/2025/09/ALC-premier-semestre-2025.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928496+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Moustachir Spa",
-      "url": "https://cosob.dz/les-informations-financieres-de-moustachir-spa-2025/",
-      "discovered_at": "2026-10-14T18:45:08.928505+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "SAIDAL Spa",
-      "url": "https://cosob.dz/wp-content/uploads/2025/07/SAI-Etats-financiers-consolides-ex-2024-1.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928514+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "AOM Invest spa",
-      "url": "https://cosob.dz/wp-content/uploads/2025/07/AOM-Etats-financiers-et-opinion-CAC-ex-2024.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928522+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "EL AURASSI",
-      "url": "https://cosob.dz/wp-content/uploads/2025/06/AUR-Etats-financiers-a-publier-ex-2024.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928532+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "BDL",
-      "url": "https://cosob.dz/wp-content/uploads/2025/06/Etats-financiers-BDL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928539+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Biopharm",
-      "url": "https://cosob.dz/wp-content/uploads/2025/05/BIO-etats-financiers-a-publier-ex-2024.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928547+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Crédit Populaire d'Algérie",
-      "url": "https://cosob.dz/wp-content/uploads/2025/05/CPA-etats-financiers-et-opinion-CAC-ex-2024-1.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928556+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Alliance Assurances Spa",
-      "url": "https://cosob.dz/wp-content/uploads/2025/05/Etats-financiers-Alliance-Assurances-ex2024.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928566+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Moustachir Spa",
-      "url": "https://cosob.dz/wp-content/uploads/2025/04/etats-financiers-Moustachir-Spa.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928575+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/09/Etats-financiers-Groupe-SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928590+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "EL AURASSI",
-      "url": "https://cosob.dz/wp-content/uploads/2024/07/Etats-financiers-2023-EL-AURASSI.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928598+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "CPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/07/Etats-financiers-2023-CPA.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928606+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "BIOPHARM",
-      "url": "https://cosob.dz/wp-content/uploads/2024/08/BIOPHARM2023-1.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928616+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "AOM Invest",
-      "url": "https://cosob.dz/wp-content/uploads/2024/07/Etats-financiers-2023-AOM-Invest.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928626+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "AOM Invest SPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/ETATS-FINANCIERS2022AOMINVEST.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928634+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "BIOPHARM SPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/etats-financiers-2022BIOPHARM.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928641+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/saidal2022.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928665+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "AOM Invest SPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/AOM-Invest-spa-Etats-financiers-exercice2021.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928673+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "BIOPHARM SPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/Biopharm-spa-etats-financiers-exercice-2021.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928681+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "ALLIANCE ASSURANCES",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/Alliance-Assurances-Etats-financiers-exercices-2021.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928690+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/SAIDAL-Etats-financiers-consolides-exercice-2021.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928699+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
       "title": "CHAINE EGH EL AURASSI",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/EGHAURASSI-Etats-financiers-exercice-2021.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928707+00:00",
+      "url": "https://cosob.dz/wp-content/uploads/2024/05/BILANAURASSI2022_compressed.pdf",
+      "company": "EGH El Aurassi",
+      "year": 2024,
+      "category": "financial_document",
+      "discovered_at": "2026-10-14T20:34:06.100918+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
     {
-      "title": "AOM Invest SPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/AOM-Invest-Etats-financiers-exercice-2020.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928716+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "BIOPHARM SPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/Biopharm-spa-Etats-financiers-consolides-exercice-2020.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928724+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "ALLIANCE ASSURANCES",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/Alliance-Assurances-Etats-financiers-exercice-2020.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928733+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/Groupe-Saidal.-Etats-financiers-consolides-exercice-2020.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928742+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "CHAINE EGH EL AURASSI",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/EGH-spa-Chaine-El-Aurassi-etats-financiers-consolides-exercice-2020.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928750+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "NCA ROUIBA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/NCA-Rouiba-Etats-financiers-exercice-2019.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928758+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "AOM Invest SPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/AOM-invest-Etats-financiers-exercice-2019.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928766+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "BIOPHARM SPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/Biopharm-spa-Etats-financiers-exercice-2019.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928773+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "ALLIANCE ASSURANCES",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/Alliance-Assurances-Etats-financiers-exercice-2019.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928781+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/Groupe-Saidal-Etats-financiers-consolides-exercice-2019.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928789+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "CHAINE EGH EL AURASSI",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/Etats-financiers-EGH-Al-Aurassi-2019.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928797+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "NCA ROUIBA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/NCA-Rouiba-spa-Les-etats-financiers-arretes-au-31-12-2018.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928805+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "AOM Invest SPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/AOM-SPA-Etats-financiers-exercice-2018.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928812+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "BIOPHARM SPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2018Biopharm.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928821+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/Groupe-SAIDAL-Etats-financiers-exercice-2018.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928836+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "CHAINE EGH EL AURASSI",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/Aurassi-Etats-financiers-2018.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928844+00:00",
+      "title": "NCA ROUIBA:",
+      "url": "https://cosob.dz/wp-content/uploads/2024/07/NCA-Rouiba-Bilan-2017.pdf",
+      "company": null,
+      "year": 2024,
+      "category": "financial_document",
+      "discovered_at": "2026-10-14T20:34:06.101307+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
     {
       "title": "BIOPHARM SPA",
       "url": "https://cosob.dz/wp-content/uploads/2024/05/Biopharm-Bilan-et-TCR-2017.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928865+00:00",
+      "company": "BIOPHARM",
+      "year": 2024,
+      "category": "financial_document",
+      "discovered_at": "2026-10-14T20:34:06.101329+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "ALLIANCE ASSURANCES",
+      "url": "https://cosob.dz/wp-content/uploads/2024/05/Alliance-Bilan-2017.pdf",
+      "company": null,
+      "year": 2024,
+      "category": "financial_document",
+      "discovered_at": "2026-10-14T20:34:06.101364+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
     {
       "title": "Groupe SAIDAL",
       "url": "https://cosob.dz/wp-content/uploads/2024/05/Saidal-Bilan-consolide-2017.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928881+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "BIOPHARM SPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2016Biopharm.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928904+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2016SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928920+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "NCA ROUIBA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/ETATS-FINANCIERS-NCA-ROUIBA-2015.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928936+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "BIOPHARM SPA",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/ETATS-FINANCIERS-BIOPHARM-2015.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928944+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "ALLIANCE ASSURANCES",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/ETATS-FINANCIERS-ALLIANCE-ASSURANCES-2015.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928952+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/SAIDAL2015.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928960+00:00",
+      "company": "SAIDAL",
+      "year": 2024,
+      "category": "financial_document",
+      "discovered_at": "2026-10-14T20:34:06.101384+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
     {
       "title": "EGH CHAINE EL AURASSI",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/ETATS-FINANCIERS-CHAINE-EL-AURASSI-2015.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928967+00:00",
+      "url": "https://cosob.dz/wp-content/uploads/2024/05/El-Aurassi-Bilan-2017.pdf",
+      "company": "EGH El Aurassi",
+      "year": 2024,
+      "category": "financial_document",
+      "discovered_at": "2026-10-14T20:34:06.101407+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
     {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2014SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.928984+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2013Saidal.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929036+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2012Saidal.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929073+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2011SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929103+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2010SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929139+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2009SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929216+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2008SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929283+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2007SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929363+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2006SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929452+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "SOCIÉTÉ DE REFINANCEMENT HYPOTHÉCAIRE",
-      "url": "https://cosob.dz/wp-content/uploads/2024/06/2005SRH.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929482+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2005SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929542+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "SOCIÉTÉ DE REFINANCEMENT HYPOTHÉCAIRE",
-      "url": "https://cosob.dz/wp-content/uploads/2024/06/2004SRH.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929565+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2004SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929623+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "SOCIÉTÉ DE REFINANCEMENT HYPOTHÉCAIRE",
-      "url": "https://cosob.dz/wp-content/uploads/2024/06/2003SRH.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929639+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2003SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929683+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "SOCIÉTÉ DE REFINANCEMENT HYPOTHÉCAIRE",
-      "url": "https://cosob.dz/wp-content/uploads/2024/06/2002SRH.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929707+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Groupe SAIDAL",
-      "url": "https://cosob.dz/wp-content/uploads/2024/05/2002SAIDAL.pdf",
-      "discovered_at": "2026-10-14T18:45:08.929743+00:00",
+      "title": "ALLIANCE ASSURANCES",
+      "url": "https://cosob.dz/wp-content/uploads/2024/05/Alliances-Assurances-bilan-au-31-12-2016.pdf",
+      "company": null,
+      "year": 2024,
+      "category": "financial_document",
+      "discovered_at": "2026-10-14T20:34:06.101460+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     }

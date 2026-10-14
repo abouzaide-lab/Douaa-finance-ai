@@ -56,13 +56,60 @@ def records_to_values(obj):
             except (TypeError, ValueError):
                 pass
     return values
+# أسماء المؤشرات المالية باللغة العربية
+METRIC_LABELS = {
+    "revenue": "رقم الأعمال",
+    "ebitda_ebe": "الفائض الإجمالي للاستغلال (EBE)",
+    "operating_result": "النتيجة التشغيلية",
+    "net_profit": "صافي الربح",
+    "equity": "حقوق الملكية",
+    "total_assets": "إجمالي الأصول",
+    "current_assets": "الأصول المتداولة",
+    "current_liabilities": "الخصوم المتداولة",
+    "inventory": "المخزون",
+    "total_debt": "إجمالي الديون",
+    "self_financing_capacity": "القدرة على التمويل الذاتي",
+    "capital_expenditure": "نفقات الاستثمار",
+    "roe": "العائد على حقوق الملكية (ROE)"
+}
 
 def display_name(key, obj):
-    return str(obj.get("company") or key.replace("_", " ").title())
+    if not isinstance(obj, dict):
+        return key.replace("_", " ").title()
+
+    names = {
+        "saidal": "صيدال",
+        "said al": "صيدال",
+        "biopharm": "بيوفارم"
+    }
+
+    company = str(obj.get("company_name") or obj.get("company") or "").strip()
+
+    if company:
+        normalized = company.lower()
+        if normalized in names:
+            return names[normalized]
+        return company
+
+    key_lower = key.lower()
+
+    if "saidal" in key_lower:
+        return "صيدال"
+
+    if "biopharm" in key_lower:
+        return "بيوفارم"
+
+    return key.replace("_", " ").title()
+
 
 def fiscal_year(obj):
-    return obj.get("fiscal_year", "غير محددة") if isinstance(obj, dict) else "غير محددة"
+    if not isinstance(obj, dict):
+        return "غير محددة"
 
+    return obj.get(
+        "fiscal_year",
+        obj.get("report_year", "غير محددة")
+    )
 def explain_margin(value, name):
     if value is None:
         return f"لا يمكن تفسير {name} بسبب نقص البيانات."

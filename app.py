@@ -101,8 +101,16 @@ def display_name(key, obj):
 
     return key.replace("_", " ").title()
 
-
 def fiscal_year(obj):
+    if not isinstance(obj, dict):
+        return "غير محددة"
+
+    return obj.get(
+        "fiscal_year",
+        obj.get("report_year", "غير محددة")
+    )
+
+
 def show_data_verification(obj):
     if not isinstance(obj, dict):
         st.warning("تعذر التحقق من بنية بيانات الشركة.")
@@ -111,7 +119,7 @@ def show_data_verification(obj):
     status = obj.get("verification_status", "unknown")
     source = obj.get("source", "المصدر غير محدد")
     source_url = obj.get("source_url")
-    year = obj.get("report_year", "غير محددة")
+    year = fiscal_year(obj)
 
     st.subheader("🔎 مصدر البيانات والتحقق منها")
     st.write(f"السنة المالية: {year}")
@@ -131,24 +139,17 @@ def show_data_verification(obj):
         st.markdown(f"[فتح التقرير الأصلي]({source_url})")
 
     records = obj.get("records", [])
+
     pending = [
         record.get("label", record.get("metric", "مؤشر غير مسمى"))
         for record in records
-        if record.get("verification_status")
-        != "verified"
+        if record.get("verification_status") != "verified"
     ]
 
     if pending:
         st.write("المؤشرات التي تحتاج إلى مراجعة:")
         for label in pending:
             st.write(f"• {label}")
-    if not isinstance(obj, dict):
-        return "غير محددة"
-
-    return obj.get(
-        "fiscal_year",
-        obj.get("report_year", "غير محددة")
-    )
 def explain_margin(value, name):
     if value is None:
         return f"لا يمكن تفسير {name} بسبب نقص البيانات."

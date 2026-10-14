@@ -324,23 +324,96 @@ with tab2:
             st.subheader(f"نتائج المقارنة: {a['name']} و{b['name']}")
             st.caption(f"السنة المالية: {a['year']} مقابل {b['year']}")
             c1,c2 = st.columns(2); c1.metric(a["name"]+" — الإيرادات", money(a["revenue"])); c2.metric(b["name"]+" — الإيرادات", money(b["revenue"]))
-            c1,c2 = st.columns(2); c1.metric(a["name"]+" — صافي الربح", money(a["net_profit"])); c2.metric(b["name"]+" — صافي الربح", money(b["net_profit"]))
-            ma, mb = ratio(a["net_profit"],a["revenue"]), ratio(b["net_profit"],b["revenue"])
-            c1,c2 = st.columns(2); c1.metric(a["name"]+" — هامش صافي الربح", percent(ma*100 if ma is not None else None)); c2.metric(b["name"]+" — هامش صافي الربح", percent(mb*100 if mb is not None else None))
-            if ma is None or mb is None: st.warning("تعذرت مقارنة هامش الربح؛ تحقق من توفر الإيرادات وصافي الربح.")
-            elif ma > mb: st.success(f"{a['name']} لديها هامش صافي ربح أعلى وفق البيانات المتاحة.")
-            elif mb > ma: st.success(f"{b['name']} لديها هامش صافي ربح أعلى وفق البيانات المتاحة.")
-            else: st.info("هامش صافي الربح متساوٍ بين الشركتين.")
-            st.markdown("**الديون إلى حقوق الملكية**")
-            da = ratio(a["total_debt"],a["equity"]) if a["debt_available"] else None
-            db = ratio(b["total_debt"],b["equity"]) if b["debt_available"] else None
-            c1,c2 = st.columns(2); c1.metric(a["name"], f"{da:.2f} مرة" if da is not None else "غير متوفر"); c2.metric(b["name"], f"{db:.2f} مرة" if db is not None else "غير متوفر")
-            if da is None or db is None: st.info("لا يمكن مقارنة المديونية بدقة إذا لم يتوفر إجمالي الديون وحقوق الملكية في الملف.")
-            elif da < db: st.info(f"{a['name']} لديها نسبة ديون إلى حقوق ملكية أقل.")
-            elif db < da: st.info(f"{b['name']} لديها نسبة ديون إلى حقوق ملكية أقل.")
-            else: st.info("نسبة الديون إلى حقوق الملكية متساوية.")
-            st.caption("تعتمد النتائج على البيانات المحفوظة أو المدخلة؛ ولا تكفي وحدها لتقييم السهم.")
+                        ma = ratio(a["net_profit"], a["revenue"])
+            mb = ratio(b["net_profit"], b["revenue"])
 
+            da = (
+                ratio(a["total_debt"], a["equity"])
+                if a["debt_available"] else None
+            )
+            db = (
+                ratio(b["total_debt"], b["equity"])
+                if b["debt_available"] else None
+            )
+
+            st.subheader("📊 جدول المقارنة المالية")
+
+            comparison_rows = [
+                {
+                    "المؤشر المالي": "رقم الأعمال",
+                    a["name"]: money(a["revenue"]),
+                    b["name"]: money(b["revenue"]),
+                },
+                {
+                    "المؤشر المالي": "صافي الربح",
+                    a["name"]: money(a["net_profit"]),
+                    b["name"]: money(b["net_profit"]),
+                },
+                {
+                    "المؤشر المالي": "هامش صافي الربح",
+                    a["name"]: percent(ma * 100 if ma is not None else None),
+                    b["name"]: percent(mb * 100 if mb is not None else None),
+                },
+                {
+                    "المؤشر المالي": "إجمالي الديون",
+                    a["name"]: money(a["total_debt"]),
+                    b["name"]: money(b["total_debt"]),
+                },
+                {
+                    "المؤشر المالي": "حقوق الملكية",
+                    a["name"]: money(a["equity"]),
+                    b["name"]: money(b["equity"]),
+                },
+                {
+                    "المؤشر المالي": "الديون إلى حقوق الملكية",
+                    a["name"]: f"{da:.2f} مرة" if da is not None else "غير متوفر",
+                    b["name"]: f"{db:.2f} مرة" if db is not None else "غير متوفر",
+                },
+            ]
+
+            st.dataframe(
+                pd.DataFrame(comparison_rows),
+                use_container_width=True,
+                hide_index=True,
+            )
+
+            st.subheader("🧠 تفسير المقارنة")
+
+            if ma is None or mb is None:
+                st.info(
+                    "تعذرت مقارنة هامش الربح؛ تحقق من توفر الإيرادات وصافي الربح."
+                )
+            elif ma > mb:
+                st.info(
+                    f"{a['name']} لديها هامش صافي ربح أعلى وفق البيانات المتاحة."
+                )
+            elif mb > ma:
+                st.info(
+                    f"{b['name']} لديها هامش صافي ربح أعلى وفق البيانات المتاحة."
+                )
+            else:
+                st.info("هامش صافي الربح متساوٍ بين الشركتين.")
+
+            if da is None or db is None:
+                st.info(
+                    "لا يمكن مقارنة المديونية بدقة إذا لم يتوفر إجمالي الديون "
+                    "وحقوق الملكية في الملف."
+                )
+            elif da < db:
+                st.info(
+                    f"{a['name']} لديها نسبة ديون إلى حقوق ملكية أقل."
+                )
+            elif db < da:
+                st.info(
+                    f"{b['name']} لديها نسبة ديون إلى حقوق ملكية أقل."
+                )
+            else:
+                st.info("نسبة الديون إلى حقوق الملكية متساوية.")
+
+            st.caption(
+                "تعتمد النتائج على البيانات المحفوظة أو المدخلة، "
+                "ولا تكفي وحدها لتقييم السهم أو اتخاذ قرار استثماري."
+            )
 with tab3:
     st.header("حاسبة السندات")
     face_value = st.number_input("القيمة الاسمية للسند (دج)", min_value=0.0, value=0.0, key="bond_face")

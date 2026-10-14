@@ -324,7 +324,7 @@ with tab2:
             st.subheader(f"نتائج المقارنة: {a['name']} و{b['name']}")
             st.caption(f"السنة المالية: {a['year']} مقابل {b['year']}")
             c1,c2 = st.columns(2); c1.metric(a["name"]+" — الإيرادات", money(a["revenue"])); c2.metric(b["name"]+" — الإيرادات", money(b["revenue"]))
-                        ma = ratio(a["net_profit"], a["revenue"])
+            ma = ratio(a["net_profit"], a["revenue"])
             mb = ratio(b["net_profit"], b["revenue"])
 
             da = (

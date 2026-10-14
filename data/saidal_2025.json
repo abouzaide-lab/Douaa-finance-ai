@@ -1,7 +1,15 @@
 
 {
   "company": "SAIDAL",
+  "company_name": "صيدال",
   "fiscal_year": 2025,
+  "report_year": 2025,
+  "currency": "DZD",
+  "scope": "individual",
+  "source": "COSOB - Rapport annuel SAIDAL 2025",
+  "source_url": "https://cosob.dz/wp-content/uploads/2026/06/SA-Rapport-annuel-AGO-ex2025.pdf",
+  "verification_status": "pending_primary_source_review",
+  "last_reviewed": null,
   "comparative_data": {
     "2024": {
       "revenue": 22193974396.33,

@@ -2,7 +2,7 @@ import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -15,55 +15,110 @@ COSOB_URL = (
 DATA_DIR = Path(__file__).parent
 OUTPUT_FILE = DATA_DIR / "discovered_reports.json"
 
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 NouraFinanceAI/1.0"
+}
+
+COMPANIES = {
+    "saidal": "SAIDAL",
+    "biopharm": "BIOPHARM",
+    "aom invest": "AOM Invest",
+    "aom-invest": "AOM Invest",
+    "aurassi": "EGH El Aurassi",
+    "alliance assurances": "Alliance Assurances",
+    "alliance-assurances": "Alliance Assurances",
+    "moustachir": "Moustachir",
+    "cpa": "CPA",
+    "bdl": "BDL",
+    "nca rouiba": "NCA Rouiba",
+}
+
+FINANCIAL_TERMS = (
+    "rapport annuel",
+    "rapport financier",
+    "etats financiers",
+    "états financiers",
+    "informations financieres",
+    "informations financières",
+    "bilan",
+    "tcr",
+    "financial statements",
+)
+
+# لا نستخدم سنة مجلد الرفع مثل /2024/05/
+# لأنها قد لا تكون سنة التقرير المالي.
+YEAR_PATTERN = re.compile(
+    r"(?<!\d)(20(?:0\d|1\d|2\d))(?!\d)"
+)
+
+
+def identify_company(text):
+    normalized = text.lower()
+
+    for keyword, company in COMPANIES.items():
+        if keyword in normalized:
+            return company
+
+    return None
+
+
+def extract_report_year(text):
+    """
+    نستخرج السنة من اسم التقرير أو عنوانه.
+    لا نستخرجها من مجلدات الرابط.
+    """
+    normalized = text.lower()
+
+    matches = YEAR_PATTERN.findall(normalized)
+
+    if not matches:
+        return None
+
+    # نعطي الأولوية لسنة قريبة من كلمات التقرير المالي.
+    for match in re.finditer(
+        r"(rapport|financier|financiers|bilan|exercice|"
+        r"etats financiers|états financiers)",
+        normalized,
+    ):
+        start = max(0, match.start() - 70)
+        end = min(len(normalized), match.end() + 100)
+
+        nearby_years = YEAR_PATTERN.findall(
+            normalized[start:end]
+        )
+
+        if nearby_years:
+            return int(nearby_years[-1])
+
+    return int(matches[-1])
+
 
 def classify_link(title, url):
-    text = f"{title} {url}".lower()
+    path = urlparse(url).path.lower()
+    text = f"{title} {path}".lower()
 
-    companies = {
-        "saidal": "SAIDAL",
-        "biopharm": "BIOPHARM",
-        "aom-invest": "AOM Invest",
-        "aurassi": "EGH El Aurassi",
-        "alliance-assurances": "Alliance Assurances",
-        "moustachir": "Moustachir",
-        "cpa": "CPA",
-        "bdl": "BDL",
-    }
+    company = identify_company(text)
 
-    company = None
-
-    for keyword, name in companies.items():
-        if keyword in text:
-            company = name
-            break
-
-    year_match = re.search(r"20(?:0\d|1\d|2\d)", text)
-    year = int(year_match.group()) if year_match else None
-
-    is_pdf = url.lower().split("?")[0].endswith(".pdf")
-
-    financial_terms = (
-        "rapport annuel",
-        "etats financiers",
-        "états financiers",
-        "informations financieres",
-        "informations financières",
-        "bilan",
-        "tcr",
-        "resultats financiers",
-        "résultats financiers",
-    )
+    is_pdf = path.endswith(".pdf")
 
     is_financial = any(
-        term in text for term in financial_terms
+        term in text for term in FINANCIAL_TERMS
     )
 
     if is_pdf and is_financial:
         category = "financial_document"
+    elif company and (
+        "informations-financieres" in path
+        or "informations-financiere" in path
+        or "rapport-annuel" in path
+    ):
+        category = "company_financial_page"
     elif company and is_financial:
         category = "company_financial_page"
     else:
         category = "other"
+
+    year = extract_report_year(text)
 
     return {
         "company": company,
@@ -72,48 +127,94 @@ def classify_link(title, url):
     }
 
 
-def discover_reports():
+def fetch_page(url):
     response = requests.get(
-        COSOB_URL,
+        url,
+        headers=HEADERS,
         timeout=30,
-        headers={"User-Agent": "NouraFinanceAI/1.0"},
     )
     response.raise_for_status()
 
-    soup = BeautifulSoup(response.text, "html.parser")
+    return BeautifulSoup(
+        response.text,
+        "html.parser",
+    )
 
-    reports = []
-    seen_urls = set()
 
-    for link in soup.find_all("a", href=True):
-        title = " ".join(
-            link.get_text(" ", strip=True).split()
-        )
-        url = urljoin(COSOB_URL, link["href"])
+def discover_reports():
+    soup = fetch_page(COSOB_URL)
 
-        if "cosob.dz" not in url.lower():
+    # نبدأ بصفحة COSOB الرئيسية للمعلومات المالية.
+    pages_to_visit = {COSOB_URL}
+    reports = {}
+    visited_pages = set()
+
+    while pages_to_visit:
+        page_url = pages_to_visit.pop()
+
+        if page_url in visited_pages:
             continue
 
-        details = classify_link(title, url)
+        visited_pages.add(page_url)
 
-        if details["category"] == "other":
+        try:
+            page = (
+                soup
+                if page_url == COSOB_URL
+                else fetch_page(page_url)
+            )
+        except requests.RequestException as error:
+            print(f"تعذر فتح الصفحة {page_url}: {error}")
             continue
 
-        if url in seen_urls:
-            continue
+        for link in page.find_all("a", href=True):
+            title = " ".join(
+                link.get_text(" ", strip=True).split()
+            )
 
-        seen_urls.add(url)
+            url = urljoin(page_url, link["href"])
+            parsed = urlparse(url)
 
-        reports.append({
-            "title": title or "رابط دون عنوان",
-            "url": url,
-            **details,
-            "discovered_at": datetime.now(
-                timezone.utc
-            ).isoformat(),
-            "source": "COSOB",
-            "verification_status": "needs_review",
-        })
+            if parsed.netloc.lower() not in (
+                "cosob.dz",
+                "www.cosob.dz",
+            ):
+                continue
+
+            if parsed.scheme not in ("http", "https"):
+                continue
+
+            # نتجنب تكرار الصفحة نفسها مع اختلاف #tabs.
+            clean_url = (
+                parsed.scheme
+                + "://"
+                + parsed.netloc
+                + parsed.path
+                + ("?" + parsed.query if parsed.query else "")
+            )
+
+            details = classify_link(title, clean_url)
+
+            if details["category"] == "company_financial_page":
+                if clean_url not in visited_pages:
+                    pages_to_visit.add(clean_url)
+
+            if details["category"] == "other":
+                continue
+
+            if clean_url in reports:
+                continue
+
+            reports[clean_url] = {
+                "title": title or "رابط دون عنوان",
+                "url": clean_url,
+                **details,
+                "discovered_at": datetime.now(
+                    timezone.utc
+                ).isoformat(),
+                "source": "COSOB",
+                "verification_status": "needs_review",
+            }
 
     result = {
         "source": COSOB_URL,
@@ -121,32 +222,36 @@ def discover_reports():
             timezone.utc
         ).isoformat(),
         "reports_found": len(reports),
-        "reports": reports,
+        "reports": list(reports.values()),
     }
 
     OUTPUT_FILE.write_text(
-        json.dumps(result, ensure_ascii=False, indent=2),
+        json.dumps(
+            result,
+            ensure_ascii=False,
+            indent=2,
+        ),
         encoding="utf-8",
     )
 
-    financial_documents = sum(
-        1 for report in reports
-        if report["category"] == "financial_document"
-    )
+    documents = [
+        item for item in reports.values()
+        if item["category"] == "financial_document"
+    ]
 
-    company_pages = sum(
-        1 for report in reports
-        if report["category"] == "company_financial_page"
-    )
+    company_pages = [
+        item for item in reports.values()
+        if item["category"] == "company_financial_page"
+    ]
 
-    print(f"إجمالي الروابط المالية المحتملة: {len(reports)}")
-    print(f"ملفات PDF المالية المحتملة: {financial_documents}")
-    print(f"صفحات الشركات المالية: {company_pages}")
+    print(f"إجمالي النتائج المحتملة: {len(reports)}")
+    print(f"ملفات PDF المالية المحتملة: {len(documents)}")
+    print(f"صفحات الشركات المالية: {len(company_pages)}")
 
-    for report in reports:
+    for report in reports.values():
         print(
             f"- {report['company'] or 'شركة غير محددة'} | "
-            f"{report['year'] or 'سنة غير محددة'} | "
+            f"{report['year'] or 'السنة غير محددة'} | "
             f"{report['category']} | {report['url']}"
         )
 
@@ -154,8 +259,4 @@ def discover_reports():
 
 
 if __name__ == "__main__":
-    try:
-        discover_reports()
-    except Exception as error:
-        print(f"تعذر اكتشاف التقارير: {error}")
-        raise
+    discover_reports()

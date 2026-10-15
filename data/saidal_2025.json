@@ -1,4 +1,3 @@
-
 {
   "company": "SAIDAL",
   "company_name": "صيدال",
@@ -8,8 +7,8 @@
   "scope": "individual",
   "source": "COSOB - Rapport annuel SAIDAL 2025",
   "source_url": "https://cosob.dz/wp-content/uploads/2026/06/SA-Rapport-annuel-AGO-ex2025.pdf",
-  "verification_status": "pending_primary_source_review",
-  "last_reviewed": null,
+  "verification_status": "partially_verified_against_report",
+  "last_reviewed": "2026-10-15",
   "comparative_data": {
     "2024": {
       "revenue": 22193974396.33,
@@ -21,13 +20,13 @@
   "records": [
     {
       "metric": "revenue",
-      "label_ar": "الإيرادات",
+      "label_ar": "رقم الأعمال",
       "year": 2025,
       "value": 44040415721.22,
       "unit": "DZD",
       "source_page": 44,
       "data_type": "reported",
-      "verification_status": "check_exact_statement_value"
+      "verification_status": "verified_against_report_page"
     },
     {
       "metric": "ebitda_ebe",
@@ -37,7 +36,7 @@
       "unit": "DZD",
       "source_page": 44,
       "data_type": "reported",
-      "verification_status": "check_exact_statement_value"
+      "verification_status": "verified_against_report_page"
     },
     {
       "metric": "operating_result",
@@ -47,17 +46,17 @@
       "unit": "DZD",
       "source_page": 44,
       "data_type": "reported",
-      "verification_status": "check_exact_statement_value"
+      "verification_status": "verified_against_report_page"
     },
     {
       "metric": "net_profit",
-      "label_ar": "صافي الربح",
+      "label_ar": "صافي نتيجة السنة",
       "year": 2025,
       "value": 3205353537.32,
       "unit": "DZD",
       "source_page": 44,
       "data_type": "reported",
-      "verification_status": "check_exact_statement_value"
+      "verification_status": "verified_against_report_page"
     },
     {
       "metric": "current_assets",
@@ -67,7 +66,7 @@
       "unit": "DZD",
       "source_page": 42,
       "data_type": "reported",
-      "verification_status": "check_exact_statement_value"
+      "verification_status": "verified_against_report_page"
     },
     {
       "metric": "current_liabilities",
@@ -75,9 +74,9 @@
       "year": 2025,
       "value": 29295164639.38,
       "unit": "DZD",
-      "source_page": 42,
+      "source_page": 43,
       "data_type": "reported",
-      "verification_status": "check_exact_statement_value"
+      "verification_status": "verified_against_report_page"
     },
     {
       "metric": "inventory",
@@ -87,7 +86,7 @@
       "unit": "DZD",
       "source_page": 42,
       "data_type": "reported",
-      "verification_status": "check_exact_statement_value"
+      "verification_status": "verified_against_report_page"
     },
     {
       "metric": "total_assets",
@@ -97,7 +96,7 @@
       "unit": "DZD",
       "source_page": 42,
       "data_type": "reported",
-      "verification_status": "check_exact_statement_value"
+      "verification_status": "verified_against_report_page"
     },
     {
       "metric": "equity",
@@ -105,9 +104,29 @@
       "year": 2025,
       "value": 23385694028.08,
       "unit": "DZD",
-      "source_page": 42,
+      "source_page": 43,
       "data_type": "reported",
-      "verification_status": "check_exact_statement_value"
+      "verification_status": "verified_against_report_page"
+    },
+    {
+      "metric": "non_current_liabilities",
+      "label_ar": "إجمالي الخصوم غير المتداولة",
+      "year": 2025,
+      "value": 19697014358.98,
+      "unit": "DZD",
+      "source_page": 43,
+      "data_type": "reported",
+      "verification_status": "verified_against_report_page"
+    },
+    {
+      "metric": "total_liabilities_and_equity",
+      "label_ar": "إجمالي الخصوم وحقوق الملكية",
+      "year": 2025,
+      "value": 72377873026.44,
+      "unit": "DZD",
+      "source_page": 43,
+      "data_type": "reported",
+      "verification_status": "verified_against_report_page"
     }
   ]
 }

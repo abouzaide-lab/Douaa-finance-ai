@@ -5,6 +5,199 @@ import pandas as pd
 import streamlit as st
 import fitz
 
+# --------------------------------------------------
+# استخراج المؤشرات المالية من النص العربي والفرنسي
+# --------------------------------------------------
+
+FINANCIAL_INDICATORS = {
+    "revenue": {
+        "label": "رقم الأعمال",
+        "patterns": [
+            r"chiffre\s+d['’]affaires",
+            r"revenus?\s+d['’]activit[eé]",
+            r"رقم\s+الأعمال",
+            r"إيرادات"
+        ]
+    },
+    "operating_result": {
+        "label": "النتيجة التشغيلية",
+        "patterns": [
+            r"r[eé]sultat\s+op[eé]rationnel",
+            r"r[eé]sultat\s+d['’]exploitation",
+            r"النتيجة\s+التشغيلية",
+            r"نتيجة\s+الاستغلال"
+        ]
+    },
+    "net_profit": {
+        "label": "صافي الربح",
+        "patterns": [
+            r"r[eé]sultat\s+net",
+            r"b[eé]n[eé]fice\s+net",
+            r"صافي\s+الربح",
+            r"النتيجة\s+الصافية"
+        ]
+    },
+    "current_assets": {
+        "label": "الأصول المتداولة",
+        "patterns": [
+            r"actif\s+circulant",
+            r"actifs?\s+courants?",
+            r"الأصول\s+المتداولة"
+        ]
+    },
+    "current_liabilities": {
+        "label": "الخصوم المتداولة",
+        "patterns": [
+            r"passif\s+circulant",
+            r"passifs?\s+courants?",
+            r"الخصوم\s+المتداولة"
+        ]
+    },
+    "total_assets": {
+        "label": "إجمالي الأصول",
+        "patterns": [
+            r"total\s+(?:de\s+)?l['’]actif",
+            r"total\s+actif",
+            r"إجمالي\s+الأصول",
+            r"مجموع\s+الأصول"
+        ]
+    },
+    "equity": {
+        "label": "حقوق الملكية",
+        "patterns": [
+            r"capitaux\s+propres",
+            r"حقوق\s+الملكية",
+            r"الأموال\s+الخاصة"
+        ]
+    }
+}
+
+
+def parse_financial_number(text):
+    """
+    يحاول تحويل رقم مكتوب بالصيغة الفرنسية أو الإنجليزية
+    إلى قيمة عددية. يعيد None إذا لم يتمكن من تفسيره.
+    """
+    if not text:
+        return None
+
+    value = text.strip()
+    value = value.replace("\u00a0", "")
+    value = value.replace("\u202f", "")
+    value = value.replace(" ", "")
+    value = value.replace("’", "'")
+
+    # إزالة رموز العملات والفواصل النصية
+    value = re.sub(r"(?i)(DZD|DA|EUR|USD|دج)", "", value)
+    value = value.strip(":")
+
+    if not re.fullmatch(r"[+-]?\d[\d.,]*", value):
+        return None
+
+    # إذا اجتمعت النقطة والفاصلة، نعتبر آخرهما فاصلًا عشريًا
+    if "," in value and "." in value:
+        if value.rfind(",") > value.rfind("."):
+            value = value.replace(".", "")
+            value = value.replace(",", ".")
+        else:
+            value = value.replace(",", "")
+
+    elif "," in value:
+        parts = value.split(",")
+        if len(parts[-1]) in (1, 2):
+            value = "".join(parts[:-1]) + "." + parts[-1]
+        else:
+            value = "".join(parts)
+
+    elif "." in value:
+        parts = value.split(".")
+        if len(parts[-1]) not in (1, 2):
+            value = "".join(parts)
+
+    try:
+        return float(value)
+    except ValueError:
+        return None
+
+
+def extract_financial_indicators(text):
+    """
+    يبحث عن أسماء المؤشرات المالية ثم يحاول استخراج
+    رقم قريب منها. النتائج أولية وتحتاج إلى مراجعة.
+    """
+    results = []
+
+    if not text:
+        return results
+
+    lines = text.splitlines()
+
+    for line_number, line in enumerate(lines):
+        normalized_line = re.sub(r"\s+", " ", line).strip()
+
+        if not normalized_line:
+            continue
+
+        for key, indicator in FINANCIAL_INDICATORS.items():
+            for pattern in indicator["patterns"]:
+                match = re.search(
+                    pattern,
+                    normalized_line,
+                    flags=re.IGNORECASE
+                )
+
+                if not match:
+                    continue
+
+                # نبحث عن الأرقام التي تأتي بعد اسم المؤشر
+                remainder = normalized_line[match.end():]
+
+                number_matches = re.findall(
+                    r"(?<!\w)[+-]?\d[\d\s\u00a0\u202f.,]*",
+                    remainder
+                )
+
+                value = None
+
+                for candidate in number_matches:
+                    candidate = candidate.strip()
+
+                    # نتجنب الأجزاء التي لا تحتوي إلا على مسافات
+                    if not re.search(r"\d", candidate):
+                        continue
+
+                    value = parse_financial_number(candidate)
+
+                    if value is not None:
+                        break
+
+                # إذا لم نجد رقمًا بعد المؤشر، نفحص السطر التالي
+                if value is None and line_number + 1 < len(lines):
+                    next_line = lines[line_number + 1].strip()
+
+                    next_numbers = re.findall(
+                        r"(?<!\w)[+-]?\d[\d\s\u00a0\u202f.,]*",
+                        next_line
+                    )
+
+                    for candidate in next_numbers:
+                        value = parse_financial_number(candidate.strip())
+                        if value is not None:
+                            break
+
+                if value is not None:
+                    results.append({
+                        "المؤشر": indicator["label"],
+                        "اسم المؤشر البرمجي": key,
+                        "القيمة المستخرجة": value,
+                        "السطر": line_number + 1,
+                        "النص الأصلي": normalized_line,
+                        "حالة المراجعة": "يحتاج إلى التحقق"
+                    })
+
+                break
+
+    return results
 st.set_page_config(page_title="دعاء المالية | Douaa Finance AI", page_icon="📊", layout="wide")
 st.title("📊 دعاء المالية")
 st.caption("مساعد تجريبي لتحليل الشركات والأسهم والسندات")

@@ -2,9 +2,10 @@ import json
 from pathlib import Path
 import pandas as pd
 import streamlit as st
+import fitz
 
-st.set_page_config(page_title="نورة المالية | Douaa Finance AI", page_icon="📊", layout="wide")
-st.title("📊 نورة المالية")
+st.set_page_config(page_title="دعاء المالية | Douaa Finance AI", page_icon="📊", layout="wide")
+st.title("📊 دعاء المالية")
 st.caption("مساعد تجريبي لتحليل الشركات والأسهم والسندات")
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -34,7 +35,6 @@ def load_companies():
             st.warning(f"تعذر تحميل {path.name}: {exc}")
 
     return loaded
-
 
 companies = load_companies()
 data = companies.get("saidal_2025", {})
@@ -479,6 +479,93 @@ with tab3:
             yield_value = interest / purchase_price * 100
             c1,c2 = st.columns(2); c1.metric("الفائدة السنوية النظرية", money(interest)); c2.metric("العائد الجاري التقريبي", percent(yield_value))
             st.caption("العائد الجاري لا يساوي العائد حتى الاستحقاق، ولا يشمل الضرائب أو الرسوم أو مخاطر التعثر.")
+# --------------------------------------------------
+# استيراد التقارير المالية
+# --------------------------------------------------
 
 st.divider()
-st.caption("نورة المالية — أداة معلومات وتحليل تجريبية، وليست توصية استثمارية.")
+st.header("📥 استيراد التقارير المالية")
+st.write(
+    "ارفع تقرير الشركة بصيغة PDF لاستخراج النصوص "
+    "ومراجعة البيانات قبل اعتمادها."
+)
+
+uploaded_report = st.file_uploader(
+    "اختر التقرير المالي PDF",
+    type=["pdf"],
+    key="financial_report_uploader"
+)
+
+if uploaded_report is not None:
+    st.success("تم رفع الملف بنجاح.")
+
+    st.write("اسم الملف:", uploaded_report.name)
+
+    report_type = st.selectbox(
+        "نوع القوائم المالية",
+        [
+            "غير محدد بعد",
+            "فردية (Individual)",
+            "موحّدة (Consolidated)"
+        ],
+        key="report_type"
+    )
+
+    report_year = st.number_input(
+        "السنة المالية",
+        min_value=2000,
+        max_value=2100,
+        value=2025,
+        step=1,
+        key="report_year"
+    )
+
+    if st.button("🔍 استخراج نص التقرير", key="extract_report"):
+        try:
+            pdf_bytes = uploaded_report.getvalue()
+
+            with fitz.open(stream=pdf_bytes, filetype="pdf") as pdf:
+                page_count = len(pdf)
+                extracted_pages = []
+
+                for page_number, page in enumerate(pdf, start=1):
+                    page_text = page.get_text("text")
+
+                    extracted_pages.append(
+                        f"\n--- الصفحة {page_number} ---\n"
+                        f"{page_text}"
+                    )
+
+            full_text = "\n".join(extracted_pages)
+
+            st.session_state["report_text"] = full_text
+            st.session_state["report_filename"] = uploaded_report.name
+            st.session_state["report_type"] = report_type
+            st.session_state["report_year"] = int(report_year)
+
+            st.success(
+                f"اكتمل استخراج النصوص من {page_count} صفحة."
+            )
+
+            if full_text.strip():
+                st.text_area(
+                    "📄 النص المستخرج — راجعه قبل استخدامه",
+                    value=full_text[:20000],
+                    height=350,
+                    key="extracted_text_preview"
+                )
+
+                st.caption(
+                    "المعاينة تعرض أول 20,000 حرف فقط. "
+                    "لا يعني استخراج النصوص اعتماد الأرقام المالية."
+                )
+            else:
+                st.warning(
+                    "لم يُعثر على نص قابل للاستخراج. "
+                    "قد يكون التقرير ممسوحًا ضوئيًا ويحتاج إلى OCR."
+                )
+
+        except Exception as exc:
+            st.error(f"تعذر قراءة التقرير: {exc}")
+st.divider()
+st.caption("دعاء المالية — أداة معلومات وتحليل تجريبية، وليست توصية استثمارية.")

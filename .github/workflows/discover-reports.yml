@@ -1,4 +1,4 @@
-name: Noura - Discover Financial Reports
+name: Douaa - Discover Financial Reports
 
 on:
   workflow_dispatch:

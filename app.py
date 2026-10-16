@@ -11,17 +11,30 @@ DATA_DIR = Path(__file__).parent / "data"
 
 def load_companies():
     loaded = {}
+
     if not DATA_DIR.exists():
         return loaded
+
     for path in sorted(DATA_DIR.glob("*.json")):
         try:
             with path.open("r", encoding="utf-8") as f:
                 obj = json.load(f)
-            if isinstance(obj, dict):
+
+            # قبول ملفات الشركات التي تحتوي على سجلات مالية
+            if (
+                isinstance(obj, dict)
+                and isinstance(obj.get("records"), list)
+                and obj.get("company")
+                and obj.get("company_name")
+                and obj.get("fiscal_year")
+            ):
                 loaded[path.stem] = obj
+
         except (json.JSONDecodeError, OSError) as exc:
             st.warning(f"تعذر تحميل {path.name}: {exc}")
+
     return loaded
+
 
 companies = load_companies()
 data = companies.get("saidal_2025", {})

@@ -540,8 +540,6 @@ if uploaded_report is not None:
 
             st.session_state["report_text"] = full_text
             st.session_state["report_filename"] = uploaded_report.name
-            st.session_state["report_type"] = report_type
-            st.session_state["report_year"] = int(report_year)
 
             st.success(
                 f"اكتمل استخراج النصوص من {page_count} صفحة."

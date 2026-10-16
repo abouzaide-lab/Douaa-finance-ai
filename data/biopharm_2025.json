@@ -7,8 +7,8 @@
   "scope": "consolidated",
   "source": "BIOPHARM Annual Report 2025",
   "source_url": "https://cosob.dz/wp-content/uploads/2026/06/BIO-Rapport-Annuel-ex-2025-VF.pdf",
-  "verification_status": "partially_verified_against_report",
-  "last_reviewed": "2026-10-16",
+  "verification_status": "pending_primary_source_review",
+  "last_reviewed": null,
   "comparative_data": {
     "2024": {
       "revenue": 85457000000,
@@ -20,47 +20,47 @@
   "records": [
     {
       "metric": "revenue",
-      "label": "رقم الأعمال الموحد",
+      "label_ar": "رقم الأعمال الموحد",
       "value": 84197000000,
       "year": 2025,
       "unit": "DZD",
       "data_type": "reported",
-      "verification_status": "verified_against_report_page",
+      "verification_status": "needs_primary_source_check",
       "source_page": 36
     },
     {
       "metric": "ebitda_ebe",
-      "label": "فائض إجمالي الاستغلال EBE",
+      "label_ar": "الفائض الإجمالي للاستغلال EBE",
       "value": 13000000000,
       "year": 2025,
       "unit": "DZD",
       "data_type": "reported",
-      "verification_status": "verified_against_report_page",
+      "verification_status": "needs_primary_source_check",
       "source_page": 36
     },
     {
       "metric": "operating_result",
-      "label": "النتيجة التشغيلية",
+      "label_ar": "النتيجة التشغيلية",
       "value": 11407000000,
       "year": 2025,
       "unit": "DZD",
       "data_type": "reported",
-      "verification_status": "verified_against_report_page",
+      "verification_status": "needs_primary_source_check",
       "source_page": 36
     },
     {
       "metric": "net_profit",
-      "label": "صافي نتيجة السنة الموحدة",
+      "label_ar": "صافي الربح الموحد",
       "value": 9469000000,
       "year": 2025,
       "unit": "DZD",
       "data_type": "reported",
-      "verification_status": "verified_against_report_page",
+      "verification_status": "needs_primary_source_check",
       "source_page": 36
     },
     {
       "metric": "self_financing_capacity",
-      "label": "القدرة على التمويل الذاتي",
+      "label_ar": "القدرة على التمويل الذاتي",
       "value": 15673000000,
       "year": 2025,
       "unit": "DZD",
@@ -70,7 +70,7 @@
     },
     {
       "metric": "capital_expenditure",
-      "label": "نفقات الاستثمار",
+      "label_ar": "نفقات الاستثمار",
       "value": 3224000000,
       "year": 2025,
       "unit": "DZD",
@@ -80,7 +80,7 @@
     },
     {
       "metric": "roe",
-      "label": "العائد على حقوق الملكية",
+      "label_ar": "العائد على حقوق الملكية ROE",
       "value": 14.62,
       "year": 2025,
       "unit": "percent",

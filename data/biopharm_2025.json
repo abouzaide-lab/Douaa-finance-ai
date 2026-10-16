@@ -1,13 +1,22 @@
 {
   "company": "BIOPHARM",
   "company_name": "بيوفارم",
+  "fiscal_year": 2025,
   "report_year": 2025,
   "currency": "DZD",
   "scope": "consolidated",
   "source": "BIOPHARM Annual Report 2025",
   "source_url": "https://cosob.dz/wp-content/uploads/2026/06/BIO-Rapport-Annuel-ex-2025-VF.pdf",
-  "verification_status": "pending_primary_source_review",
-  "last_reviewed": null,
+  "verification_status": "partially_verified_against_report",
+  "last_reviewed": "2026-10-16",
+  "comparative_data": {
+    "2024": {
+      "revenue": 85457000000,
+      "ebitda_ebe": 14257000000,
+      "operating_result": 11398000000,
+      "net_profit": 9599000000
+    }
+  },
   "records": [
     {
       "metric": "revenue",
@@ -16,18 +25,18 @@
       "year": 2025,
       "unit": "DZD",
       "data_type": "reported",
-      "verification_status": "needs_primary_source_check",
-      "source_page": null
+      "verification_status": "verified_against_report_page",
+      "source_page": 36
     },
     {
       "metric": "ebitda_ebe",
-      "label": "الفائض الإجمالي للاستغلال EBE",
+      "label": "فائض إجمالي الاستغلال EBE",
       "value": 13000000000,
       "year": 2025,
       "unit": "DZD",
       "data_type": "reported",
-      "verification_status": "needs_primary_source_check",
-      "source_page": null
+      "verification_status": "verified_against_report_page",
+      "source_page": 36
     },
     {
       "metric": "operating_result",
@@ -36,18 +45,18 @@
       "year": 2025,
       "unit": "DZD",
       "data_type": "reported",
-      "verification_status": "needs_primary_source_check",
-      "source_page": null
+      "verification_status": "verified_against_report_page",
+      "source_page": 36
     },
     {
       "metric": "net_profit",
-      "label": "صافي الربح الموحد",
+      "label": "صافي نتيجة السنة الموحدة",
       "value": 9469000000,
       "year": 2025,
       "unit": "DZD",
       "data_type": "reported",
-      "verification_status": "needs_primary_source_check",
-      "source_page": null
+      "verification_status": "verified_against_report_page",
+      "source_page": 36
     },
     {
       "metric": "self_financing_capacity",

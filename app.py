@@ -735,6 +735,10 @@ if uploaded_report is not None:
             st.session_state["report_text"] = full_text
             st.session_state["report_filename"] = uploaded_report.name
 
+            # استخراج المؤشرات المالية
+            indicators = extract_financial_indicators(full_text)
+            st.session_state["financial_indicators"] = indicators
+
             st.success(
                 f"اكتمل استخراج النصوص من {page_count} صفحة."
             )
@@ -749,8 +753,31 @@ if uploaded_report is not None:
 
                 st.caption(
                     "المعاينة تعرض أول 20,000 حرف فقط. "
-                    "لا يعني استخراج النصوص اعتماد الأرقام المالية."
+                    "الأرقام المستخرجة أولية وتحتاج إلى المراجعة."
                 )
+
+                # عرض المؤشرات المالية المستخرجة
+                if indicators:
+                    st.subheader("📊 المؤشرات المالية المستخرجة")
+
+                    st.info(
+                        "تحقق من كل رقم في التقرير الأصلي "
+                        "قبل استخدامه في التحليل المالي."
+                    )
+
+                    indicators_df = pd.DataFrame(indicators)
+
+                    st.dataframe(
+                        indicators_df,
+                        use_container_width=True,
+                        hide_index=True
+                    )
+                else:
+                    st.warning(
+                        "لم يتم العثور على مؤشرات مالية مطابقة. "
+                        "قد يحتاج التقرير إلى قواعد استخراج إضافية."
+                    )
+
             else:
                 st.warning(
                     "لم يُعثر على نص قابل للاستخراج. "

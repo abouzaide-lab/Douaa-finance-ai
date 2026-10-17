@@ -947,7 +947,7 @@ if review_indicators:
                         "data_type": "reported"
                     })
 
-                                st.session_state["approved_financial_records"] = (
+                st.session_state["approved_financial_records"] = (
                     approved_records
                 )
 

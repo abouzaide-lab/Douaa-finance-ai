@@ -960,7 +960,29 @@ if review_indicators:
                     f"تم اعتماد {len(approved_records)} قيمة في الجلسة الحالية."
                 )
 
-                st.json(approved_records)
+                                # عرض البيانات المعتمدة في جدول مالي
+                st.subheader("📊 البيانات المالية المعتمدة")
+
+                display_rows = []
+
+                for record in approved_records:
+                    value = record["value"]
+
+                    display_rows.append({
+                        "المؤشر المالي": record["label"],
+                        "القيمة بالدينار": f"{value:,.2f} دج",
+                        "السنة المالية": record["year"],
+                        "نطاق القوائم": record["scope"],
+                        "حالة التحقق": "تم التحقق يدويًا"
+                    })
+
+                display_df = pd.DataFrame(display_rows)
+
+                st.dataframe(
+                    display_df,
+                    use_container_width=True,
+                    hide_index=True
+                )
 
                 # تجهيز ملف JSON قابل للتنزيل
                 export_data = {

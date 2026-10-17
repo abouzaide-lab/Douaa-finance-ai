@@ -866,7 +866,7 @@ if review_indicators:
         review_df,
         use_container_width=True,
         hide_index=True,
-        num_rows="dynamic",
+        num_rows="fixed",
         disabled=[
             "المؤشر",
             "اسم المؤشر البرمجي",

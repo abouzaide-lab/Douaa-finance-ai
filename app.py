@@ -122,8 +122,8 @@ def parse_financial_number(text):
 
 def extract_financial_indicators(text):
     """
-    يبحث عن أسماء المؤشرات المالية ثم يحاول استخراج
-    رقم قريب منها. النتائج أولية وتحتاج إلى مراجعة.
+    استخراج أولي للمؤشرات المالية بالعربية والفرنسية.
+    يستبعد السنوات والنسب الواضحة، ويحتفظ بالنص الأصلي للمراجعة.
     """
     results = []
 
@@ -132,10 +132,29 @@ def extract_financial_indicators(text):
 
     lines = text.splitlines()
 
+    ratio_terms = [
+        "valeur ajoutée / chiffre d'affaires",
+        "excédent brut d'exploitation/ chiffre d'affaires",
+        "excédent brut d'exploitation / chiffre d'affaires",
+        "résultat opérationnel / chiffre d'affaires",
+        "charges du personnel/chiffre d'affaires",
+        "charges du personnel / chiffre d'affaires",
+        "marge",
+        "ratio",
+        "النسبة",
+        "هامش الربح",
+    ]
+
     for line_number, line in enumerate(lines):
         normalized_line = re.sub(r"\s+", " ", line).strip()
 
         if not normalized_line:
+            continue
+
+        lower_line = normalized_line.lower()
+
+        # تجاهل الأسطر التي تصف نسبًا مالية
+        if any(term in lower_line for term in ratio_terms):
             continue
 
         for key, indicator in FINANCIAL_INDICATORS.items():
@@ -149,11 +168,11 @@ def extract_financial_indicators(text):
                 if not match:
                     continue
 
-                # نبحث عن الأرقام التي تأتي بعد اسم المؤشر
                 remainder = normalized_line[match.end():]
 
+                # استخراج الأرقام الواقعة بعد اسم المؤشر
                 number_matches = re.findall(
-                    r"(?<!\w)[+-]?\d[\d\s\u00a0\u202f.,]*",
+                    r"(?<![\w/])[-+]?\d(?:[\d\u00a0\u202f ]*\d)?(?:[.,]\d+)*",
                     remainder
                 )
 
@@ -161,28 +180,46 @@ def extract_financial_indicators(text):
 
                 for candidate in number_matches:
                     candidate = candidate.strip()
+                    parsed = parse_financial_number(candidate)
 
-                    # نتجنب الأجزاء التي لا تحتوي إلا على مسافات
-                    if not re.search(r"\d", candidate):
+                    if parsed is None:
                         continue
 
-                    value = parse_financial_number(candidate)
+                    # لا نعتمد السنة كقيمة مالية
+                    if parsed.is_integer() and 2000 <= parsed <= 2100:
+                        continue
 
-                    if value is not None:
-                        break
+                    value = parsed
+                    break
 
-                # إذا لم نجد رقمًا بعد المؤشر، نفحص السطر التالي
+                # نفحص السطر التالي فقط إذا كان قصيرًا ويبدو أنه يحتوي قيمة
                 if value is None and line_number + 1 < len(lines):
-                    next_line = lines[line_number + 1].strip()
+                    next_line = re.sub(
+                        r"\s+", " ", lines[line_number + 1]
+                    ).strip()
 
-                    next_numbers = re.findall(
-                        r"(?<!\w)[+-]?\d[\d\s\u00a0\u202f.,]*",
+                    next_lower = next_line.lower()
+
+                    if (
                         next_line
-                    )
+                        and len(next_line) <= 100
+                        and not any(term in next_lower for term in ratio_terms)
+                    ):
+                        next_numbers = re.findall(
+                            r"(?<![\w/])[-+]?\d(?:[\d\u00a0\u202f ]*\d)?(?:[.,]\d+)*",
+                            next_line
+                        )
 
-                    for candidate in next_numbers:
-                        value = parse_financial_number(candidate.strip())
-                        if value is not None:
+                        for candidate in next_numbers:
+                            parsed = parse_financial_number(candidate.strip())
+
+                            if parsed is None:
+                                continue
+
+                            if parsed.is_integer() and 2000 <= parsed <= 2100:
+                                continue
+
+                            value = parsed
                             break
 
                 if value is not None:
@@ -195,6 +232,7 @@ def extract_financial_indicators(text):
                         "حالة المراجعة": "يحتاج إلى التحقق"
                     })
 
+                # نكتفي بأول تطابق لهذا المؤشر في هذا السطر
                 break
 
     return results

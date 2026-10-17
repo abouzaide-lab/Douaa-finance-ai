@@ -776,6 +776,7 @@ if uploaded_report is not None:
             # استخراج المؤشرات المالية
             indicators = extract_financial_indicators(full_text)
             st.session_state["financial_indicators"] = indicators
+            st.session_state["financial_indicators"] = indicators
 
             st.success(
                 f"اكتمل استخراج النصوص من {page_count} صفحة."
@@ -824,5 +825,142 @@ if uploaded_report is not None:
 
         except Exception as exc:
             st.error(f"تعذر قراءة التقرير: {exc}")
+            # --------------------------------------------------
+# مراجعة المؤشرات المالية واعتمادها
+# --------------------------------------------------
+
+st.divider()
+st.header("📝 مراجعة واعتماد البيانات المالية")
+
+review_indicators = st.session_state.get(
+    "financial_indicators", []
+)
+
+if review_indicators:
+    st.info(
+        "راجع القيم المستخرجة وصححها قبل اعتمادها. "
+        "لن تُحفظ أي قيمة إلا إذا اخترت اعتمادها."
+    )
+
+    review_df = pd.DataFrame(review_indicators)
+
+    # إضافة حقول المراجعة
+    if "اعتماد القيمة" not in review_df.columns:
+        review_df["اعتماد القيمة"] = False
+
+    if "القيمة المصححة" not in review_df.columns:
+        review_df["القيمة المصححة"] = review_df["القيمة المستخرجة"]
+
+    if "السنة المالية" not in review_df.columns:
+        review_df["السنة المالية"] = int(
+            st.session_state.get("report_year", 2025)
+        )
+
+    if "نطاق القوائم" not in review_df.columns:
+        review_df["نطاق القوائم"] = st.session_state.get(
+            "report_type",
+            "غير محدد بعد"
+        )
+
+    edited_df = st.data_editor(
+        review_df,
+        use_container_width=True,
+        hide_index=True,
+        num_rows="dynamic",
+        disabled=[
+            "المؤشر",
+            "اسم المؤشر البرمجي",
+            "السطر",
+            "النص الأصلي",
+            "حالة المراجعة",
+            "القيمة المستخرجة"
+        ],
+        column_config={
+            "اعتماد القيمة": st.column_config.CheckboxColumn(
+                "اعتماد؟",
+                help="حدد هذا الخيار إذا تحققت من صحة الرقم."
+            ),
+            "القيمة المصححة": st.column_config.NumberColumn(
+                "القيمة المالية الصحيحة",
+                help="صحح الرقم وفقًا للتقرير الأصلي.",
+                format="%.2f"
+            ),
+            "السنة المالية": st.column_config.NumberColumn(
+                "السنة المالية",
+                min_value=2000,
+                max_value=2100,
+                step=1
+            ),
+            "نطاق القوائم": st.column_config.SelectboxColumn(
+                "نطاق القوائم",
+                options=[
+                    "غير محدد بعد",
+                    "فردية (Individual)",
+                    "موحّدة (Consolidated)"
+                ],
+                required=True
+            )
+        },
+        key="financial_review_editor"
+    )
+
+    st.caption(
+        "تأكد من السنة والقيمة ونطاق القوائم المالية قبل الاعتماد."
+    )
+
+    if st.button(
+        "💾 اعتماد البيانات المحددة",
+        key="approve_financial_data"
+    ):
+        approved_rows = edited_df[
+            edited_df["اعتماد القيمة"] == True
+        ]
+
+        if approved_rows.empty:
+            st.warning("حدد قيمة واحدة على الأقل لاعتمادها.")
+        else:
+            valid_rows = approved_rows[
+                approved_rows["القيمة المصححة"].notna()
+                & approved_rows["السنة المالية"].notna()
+            ]
+
+            if valid_rows.empty:
+                st.warning(
+                    "لا توجد قيم مكتملة. تحقق من الأرقام والسنوات."
+                )
+            else:
+                approved_records = []
+
+                for _, row in valid_rows.iterrows():
+                    approved_records.append({
+                        "indicator": row["اسم المؤشر البرمجي"],
+                        "label": row["المؤشر"],
+                        "value": float(row["القيمة المصححة"]),
+                        "year": int(row["السنة المالية"]),
+                        "scope": row["نطاق القوائم"],
+                        "source_file": st.session_state.get(
+                            "report_filename", ""
+                        ),
+                        "source_line": int(row["السطر"]),
+                        "source_text": row["النص الأصلي"],
+                        "verification_status": "user_verified",
+                        "data_type": "reported"
+                    })
+
+                st.session_state["approved_financial_records"] = (
+                    approved_records
+                )
+
+                st.success(
+                    f"تم اعتماد {len(approved_records)} قيمة في الجلسة الحالية."
+                )
+
+                st.json(approved_records)
+
+else:
+    st.info(
+        "ارفع تقريرًا ماليًا واستخرج النصوص أولًا "
+        "حتى تظهر المؤشرات هنا للمراجعة."
+    )
 st.divider()
 st.caption("دعاء المالية — أداة معلومات وتحليل تجريبية، وليست توصية استثمارية.")

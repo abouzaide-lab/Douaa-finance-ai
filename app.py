@@ -947,7 +947,7 @@ if review_indicators:
                         "data_type": "reported"
                     })
 
-                st.session_state["approved_financial_records"] = (
+                                st.session_state["approved_financial_records"] = (
                     approved_records
                 )
 
@@ -956,6 +956,39 @@ if review_indicators:
                 )
 
                 st.json(approved_records)
+
+                # تجهيز ملف JSON قابل للتنزيل
+                export_data = {
+                    "company": "SAIDAL",
+                    "company_name": "صيدال",
+                    "fiscal_year": int(
+                        st.session_state.get("report_year", 2025)
+                    ),
+                    "currency": "DZD",
+                    "scope": st.session_state.get(
+                        "report_type", "غير محدد بعد"
+                    ),
+                    "source_file": st.session_state.get(
+                        "report_filename", ""
+                    ),
+                    "records": approved_records
+                }
+
+                json_bytes = json.dumps(
+                    export_data,
+                    ensure_ascii=False,
+                    indent=2
+                ).encode("utf-8")
+
+                st.download_button(
+                    label="📥 تنزيل البيانات المالية المعتمدة",
+                    data=json_bytes,
+                    file_name=(
+                        f"saidal_{export_data['fiscal_year']}_reviewed.json"
+                    ),
+                    mime="application/json",
+                    key="download_approved_financial_data"
+                )
 
 else:
     st.info(

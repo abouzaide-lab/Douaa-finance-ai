@@ -842,28 +842,30 @@ if review_indicators:
         "لن تُحفظ أي قيمة إلا إذا اخترت اعتمادها."
     )
 
-    review_df = pd.DataFrame(review_indicators)
+    # إنشاء جدول المراجعة مرة واحدة فقط
+    if "financial_review_df" not in st.session_state:
+        review_df = pd.DataFrame(review_indicators)
 
-    # إضافة حقول المراجعة
-    if "اعتماد القيمة" not in review_df.columns:
         review_df["اعتماد القيمة"] = False
 
-    if "القيمة المصححة" not in review_df.columns:
-        review_df["القيمة المصححة"] = review_df["القيمة المستخرجة"]
+        review_df["القيمة المصححة"] = (
+            review_df["القيمة المستخرجة"]
+        )
 
-    if "السنة المالية" not in review_df.columns:
         review_df["السنة المالية"] = int(
             st.session_state.get("report_year", 2025)
         )
 
-    if "نطاق القوائم" not in review_df.columns:
         review_df["نطاق القوائم"] = st.session_state.get(
             "report_type",
             "غير محدد بعد"
         )
 
+        st.session_state["financial_review_df"] = review_df
+
+    # عرض الجدول مع الاحتفاظ بالتعديلات
     edited_df = st.data_editor(
-        review_df,
+        st.session_state["financial_review_df"],
         use_container_width=True,
         hide_index=True,
         num_rows="fixed",
@@ -903,6 +905,9 @@ if review_indicators:
         },
         key="financial_review_editor"
     )
+
+    # الاحتفاظ بالبيانات المعدلة
+    st.session_state["financial_review_df"] = edited_df
 
     st.caption(
         "تأكد من السنة والقيمة ونطاق القوائم المالية قبل الاعتماد."

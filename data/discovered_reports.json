@@ -1,6 +1,6 @@
 {
   "source": "https://cosob.dz/emetteurs/informations-financieres/",
-  "checked_at": "2026-10-17T10:50:40.017184+00:00",
+  "checked_at": "2026-10-19T15:24:08.493136+00:00",
   "reports_found": 50,
   "reports": [
     {
@@ -9,7 +9,7 @@
       "company": "SAIDAL",
       "year": 2026,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.464697+00:00",
+      "discovered_at": "2026-10-19T15:22:54.303500+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -19,7 +19,7 @@
       "company": "BDL",
       "year": 2026,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.464748+00:00",
+      "discovered_at": "2026-10-19T15:22:54.303564+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -29,7 +29,7 @@
       "company": "Moustachir",
       "year": 2026,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.464776+00:00",
+      "discovered_at": "2026-10-19T15:22:54.303607+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -39,7 +39,7 @@
       "company": "EGH El Aurassi",
       "year": 2026,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.464802+00:00",
+      "discovered_at": "2026-10-19T15:22:54.303685+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -49,7 +49,7 @@
       "company": "AOM Invest",
       "year": 2026,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.464828+00:00",
+      "discovered_at": "2026-10-19T15:22:54.303727+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -59,7 +59,7 @@
       "company": "BIOPHARM",
       "year": 2026,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.464852+00:00",
+      "discovered_at": "2026-10-19T15:22:54.303782+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -69,7 +69,7 @@
       "company": "CPA",
       "year": 2026,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.464876+00:00",
+      "discovered_at": "2026-10-19T15:22:54.303820+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -79,7 +79,7 @@
       "company": "Alliance Assurances",
       "year": 2026,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.464901+00:00",
+      "discovered_at": "2026-10-19T15:22:54.303860+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -89,7 +89,7 @@
       "company": "AOM Invest",
       "year": 2025,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.464926+00:00",
+      "discovered_at": "2026-10-19T15:22:54.303900+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -99,7 +99,7 @@
       "company": "EGH El Aurassi",
       "year": 2025,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.464952+00:00",
+      "discovered_at": "2026-10-19T15:22:54.303939+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -109,7 +109,7 @@
       "company": "SAIDAL",
       "year": 2025,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.464977+00:00",
+      "discovered_at": "2026-10-19T15:22:54.303977+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -119,7 +119,7 @@
       "company": "BIOPHARM",
       "year": 2025,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.465000+00:00",
+      "discovered_at": "2026-10-19T15:22:54.304015+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -129,7 +129,7 @@
       "company": "Alliance Assurances",
       "year": 2025,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.465028+00:00",
+      "discovered_at": "2026-10-19T15:22:54.304056+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -139,7 +139,7 @@
       "company": "CPA",
       "year": 2025,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.465052+00:00",
+      "discovered_at": "2026-10-19T15:22:54.304093+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -149,7 +149,7 @@
       "company": "BDL",
       "year": 2026,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.465074+00:00",
+      "discovered_at": "2026-10-19T15:22:54.304128+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -159,7 +159,7 @@
       "company": "Moustachir",
       "year": 2025,
       "category": "company_financial_page",
-      "discovered_at": "2026-10-17T10:49:40.465172+00:00",
+      "discovered_at": "2026-10-19T15:22:54.304266+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -169,7 +169,7 @@
       "company": "EGH El Aurassi",
       "year": 2022,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:40.465610+00:00",
+      "discovered_at": "2026-10-19T15:22:54.304943+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -179,7 +179,7 @@
       "company": "NCA Rouiba",
       "year": 2017,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:40.466171+00:00",
+      "discovered_at": "2026-10-19T15:22:54.305820+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -189,7 +189,7 @@
       "company": "BIOPHARM",
       "year": 2017,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:40.466198+00:00",
+      "discovered_at": "2026-10-19T15:22:54.305864+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -199,7 +199,7 @@
       "company": "Alliance Assurances",
       "year": 2017,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:40.466223+00:00",
+      "discovered_at": "2026-10-19T15:22:54.305905+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -209,7 +209,7 @@
       "company": "SAIDAL",
       "year": 2017,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:40.466261+00:00",
+      "discovered_at": "2026-10-19T15:22:54.305944+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -219,7 +219,7 @@
       "company": "EGH El Aurassi",
       "year": 2017,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:40.466304+00:00",
+      "discovered_at": "2026-10-19T15:22:54.305986+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -229,17 +229,7 @@
       "company": "Alliance Assurances",
       "year": 2016,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:40.466375+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Communiqué relatif aux états financiers semestriels",
-      "url": "https://cosob.dz/wp-content/uploads/2026/09/Communique-des-etats-financiers.pdf",
-      "company": null,
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:49.260974+00:00",
+      "discovered_at": "2026-10-19T15:22:54.306095+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -249,7 +239,7 @@
       "company": null,
       "year": 2025,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:53.105965+00:00",
+      "discovered_at": "2026-10-19T15:22:56.773559+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -259,7 +249,7 @@
       "company": null,
       "year": 2026,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:53.106063+00:00",
+      "discovered_at": "2026-10-19T15:22:56.773721+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -269,7 +259,7 @@
       "company": null,
       "year": 2026,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:53.106153+00:00",
+      "discovered_at": "2026-10-19T15:22:56.773852+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -279,187 +269,7 @@
       "company": null,
       "year": 2026,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:53.106189+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Communiqué des états financiers arrêtés au 31/12/2025 V Arabe",
-      "url": "https://cosob.dz/wp-content/uploads/2026/05/CPA-Communique-des-etats-financiers-arretes-au-31-12-2025-VA.pdf",
-      "company": "CPA",
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:56.714619+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Communiqué des états financiers arrêtés au 31/12/2025 V Française",
-      "url": "https://cosob.dz/wp-content/uploads/2026/05/CPA-Communique-des-etats-financiers-arretes-au-31-12-2025-VF.pdf",
-      "company": "CPA",
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:56.714668+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Etats financiers arrêtés au 31/12/2025 V Française",
-      "url": "https://cosob.dz/wp-content/uploads/2026/05/CPA-Etats-financiers-arretes-au-31-12-2025-VF.pdf",
-      "company": "CPA",
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:56.714700+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Attestation des Commissaires aux comptes sur les états financiers V Arabe",
-      "url": "https://cosob.dz/wp-content/uploads/2026/05/CPA-Attestation-des-Commissaires-aux-comptes-sur-les-etats-financiers-VA.pdf",
-      "company": "CPA",
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:56.714735+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Attestation des Commissaires aux comptes sur les états financiers V Française",
-      "url": "https://cosob.dz/wp-content/uploads/2026/05/CPA-Attestation-des-Commissaires-aux-comptes-sur-les-etats-financiers-VF.pdf",
-      "company": "CPA",
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:56.714768+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Rapport annuel de l'exercice 2025 V Française",
-      "url": "https://cosob.dz/wp-content/uploads/2026/05/CPA-Rapport-annuel-de-lexercice-2025-VF.pdf",
-      "company": "CPA",
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:49:56.714798+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Rapport annuel de l'exercice 2025 - V Française",
-      "url": "https://cosob.dz/wp-content/uploads/2026/06/BDL-Rapport-annuel-de-lexercice-2025-1.pdf",
-      "company": "BDL",
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:01.176031+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Etats financiers arrêtés au 31/12/2025",
-      "url": "https://cosob.dz/wp-content/uploads/2026/06/BDL-Etats-financiers-arrete-au-31-12-2025-1.pdf",
-      "company": "BDL",
-      "year": 2025,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:01.176077+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Rapport annuel de l'exercice 2025 - V Française",
-      "url": "https://cosob.dz/wp-content/uploads/2026/06/SA-Rapport-annuel-AGO-ex2025.pdf",
-      "company": null,
-      "year": 2025,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:06.596198+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Etats financiers individuels arrêtés au 31/12/2025",
-      "url": "https://cosob.dz/wp-content/uploads/2026/06/SAI-Etats-financiers-individuels-ex2025.pdf",
-      "company": null,
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:06.596245+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Etats financiers consolidés arrêtés au 31/12/2025",
-      "url": "https://cosob.dz/wp-content/uploads/2026/06/SAI-Etats-financiers-consolides-ex2025.pdf",
-      "company": null,
-      "year": 2025,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:06.596331+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Rapport annuel de l'exercice 2025",
-      "url": "https://cosob.dz/wp-content/uploads/2026/06/MST-Rapport-annuel.pdf",
-      "company": null,
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:10.188929+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Etats financiers arrêtés au 31/12/2025",
-      "url": "https://cosob.dz/wp-content/uploads/2026/06/MST-Etats-financiers-ex2025.pdf",
-      "company": null,
-      "year": 2025,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:10.188974+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "États financiers semestriels au 30/06/2026",
-      "url": "https://cosob.dz/wp-content/uploads/2026/09/Etats-financiers-1er-semestre-2026.pdf",
-      "company": null,
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:11.924097+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Rapport annuel, y compris les états financiers et le rapport CAC - V Française",
-      "url": "https://cosob.dz/wp-content/uploads/2026/06/BIO-Rapport-Annuel-ex-2025-VF.pdf",
-      "company": null,
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:16.895105+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "États financiers semestriels au 30/06/2026",
-      "url": "https://cosob.dz/wp-content/uploads/2026/09/MST-Etats-financiers-semestriels.pdf",
-      "company": null,
-      "year": 2026,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:20.213811+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Rapport annuel de l'exercice 2025 - V Française",
-      "url": "https://cosob.dz/wp-content/uploads/2026/06/AUR-Rapport-annuel-ex2025.pdf",
-      "company": null,
-      "year": 2025,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:28.826410+00:00",
-      "source": "COSOB",
-      "verification_status": "needs_review"
-    },
-    {
-      "title": "Etats financiers arrêtés au 31/12/2025",
-      "url": "https://cosob.dz/wp-content/uploads/2026/06/AUR-Etats-financiers-au-31-12-2025.pdf",
-      "company": null,
-      "year": 2025,
-      "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:28.826454+00:00",
+      "discovered_at": "2026-10-19T15:22:56.773902+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -469,7 +279,7 @@
       "company": null,
       "year": 2026,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:31.946435+00:00",
+      "discovered_at": "2026-10-19T15:23:06.189328+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -479,7 +289,127 @@
       "company": null,
       "year": 2026,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:31.946481+00:00",
+      "discovered_at": "2026-10-19T15:23:06.189393+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Communiqué des états financiers arrêtés au 31/12/2025 V Arabe",
+      "url": "https://cosob.dz/wp-content/uploads/2026/05/CPA-Communique-des-etats-financiers-arretes-au-31-12-2025-VA.pdf",
+      "company": "CPA",
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:09.216416+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Communiqué des états financiers arrêtés au 31/12/2025 V Française",
+      "url": "https://cosob.dz/wp-content/uploads/2026/05/CPA-Communique-des-etats-financiers-arretes-au-31-12-2025-VF.pdf",
+      "company": "CPA",
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:09.216481+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Etats financiers arrêtés au 31/12/2025 V Française",
+      "url": "https://cosob.dz/wp-content/uploads/2026/05/CPA-Etats-financiers-arretes-au-31-12-2025-VF.pdf",
+      "company": "CPA",
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:09.216532+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Attestation des Commissaires aux comptes sur les états financiers V Arabe",
+      "url": "https://cosob.dz/wp-content/uploads/2026/05/CPA-Attestation-des-Commissaires-aux-comptes-sur-les-etats-financiers-VA.pdf",
+      "company": "CPA",
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:09.216585+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Attestation des Commissaires aux comptes sur les états financiers V Française",
+      "url": "https://cosob.dz/wp-content/uploads/2026/05/CPA-Attestation-des-Commissaires-aux-comptes-sur-les-etats-financiers-VF.pdf",
+      "company": "CPA",
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:09.216665+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Rapport annuel de l'exercice 2025 V Française",
+      "url": "https://cosob.dz/wp-content/uploads/2026/05/CPA-Rapport-annuel-de-lexercice-2025-VF.pdf",
+      "company": "CPA",
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:09.216718+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Communiqué relatif aux états financiers semestriels",
+      "url": "https://cosob.dz/wp-content/uploads/2026/09/Communique-des-etats-financiers.pdf",
+      "company": null,
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:13.756008+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Rapport annuel de l'exercice 2025 - V Française",
+      "url": "https://cosob.dz/wp-content/uploads/2026/06/AUR-Rapport-annuel-ex2025.pdf",
+      "company": null,
+      "year": 2025,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:18.825053+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Etats financiers arrêtés au 31/12/2025",
+      "url": "https://cosob.dz/wp-content/uploads/2026/06/AUR-Etats-financiers-au-31-12-2025.pdf",
+      "company": null,
+      "year": 2025,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:18.825113+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Rapport annuel de l'exercice 2025 - V Française",
+      "url": "https://cosob.dz/wp-content/uploads/2026/06/SA-Rapport-annuel-AGO-ex2025.pdf",
+      "company": null,
+      "year": 2025,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:29.035686+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Etats financiers individuels arrêtés au 31/12/2025",
+      "url": "https://cosob.dz/wp-content/uploads/2026/06/SAI-Etats-financiers-individuels-ex2025.pdf",
+      "company": null,
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:29.035752+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Etats financiers consolidés arrêtés au 31/12/2025",
+      "url": "https://cosob.dz/wp-content/uploads/2026/06/SAI-Etats-financiers-consolides-ex2025.pdf",
+      "company": null,
+      "year": 2025,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:29.035842+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -489,7 +419,7 @@
       "company": null,
       "year": 2026,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:40.016672+00:00",
+      "discovered_at": "2026-10-19T15:23:38.522267+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     },
@@ -499,7 +429,77 @@
       "company": null,
       "year": 2026,
       "category": "financial_document",
-      "discovered_at": "2026-10-17T10:50:40.016722+00:00",
+      "discovered_at": "2026-10-19T15:23:38.522332+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "États financiers semestriels au 30/06/2026",
+      "url": "https://cosob.dz/wp-content/uploads/2026/09/MST-Etats-financiers-semestriels.pdf",
+      "company": null,
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:42.451330+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "États financiers semestriels au 30/06/2026",
+      "url": "https://cosob.dz/wp-content/uploads/2026/09/Etats-financiers-1er-semestre-2026.pdf",
+      "company": null,
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:47.187948+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Rapport annuel de l'exercice 2025",
+      "url": "https://cosob.dz/wp-content/uploads/2026/06/MST-Rapport-annuel.pdf",
+      "company": null,
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:51.383581+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Etats financiers arrêtés au 31/12/2025",
+      "url": "https://cosob.dz/wp-content/uploads/2026/06/MST-Etats-financiers-ex2025.pdf",
+      "company": null,
+      "year": 2025,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:23:51.383664+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Rapport annuel de l'exercice 2025 - V Française",
+      "url": "https://cosob.dz/wp-content/uploads/2026/06/BDL-Rapport-annuel-de-lexercice-2025-1.pdf",
+      "company": "BDL",
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:24:05.432693+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Etats financiers arrêtés au 31/12/2025",
+      "url": "https://cosob.dz/wp-content/uploads/2026/06/BDL-Etats-financiers-arrete-au-31-12-2025-1.pdf",
+      "company": "BDL",
+      "year": 2025,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:24:05.432759+00:00",
+      "source": "COSOB",
+      "verification_status": "needs_review"
+    },
+    {
+      "title": "Rapport annuel, y compris les états financiers et le rapport CAC - V Française",
+      "url": "https://cosob.dz/wp-content/uploads/2026/06/BIO-Rapport-Annuel-ex-2025-VF.pdf",
+      "company": null,
+      "year": 2026,
+      "category": "financial_document",
+      "discovered_at": "2026-10-19T15:24:08.492732+00:00",
       "source": "COSOB",
       "verification_status": "needs_review"
     }
